@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 body {
     margin: 0;
 
@@ -13,11 +15,16 @@ body {
     margin-right: auto;
 }
 
-
 .navbar {
     display: flex;
-    height: 80px; /* Pagaidu kods */
+    padding: 12px;
 
     background-color: #232323;
     border-radius: 0 0 20px 20px;
+}
+.navbar .logo img {
+    width: 200px;
+}
+.navbar .category a {
+    color: #fff
 }

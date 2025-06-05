@@ -1,4 +1,20 @@
 <div class="navbar mw14 center">
-    <div>
-    <div>
+    <a href="<?php echo e(route('index')); ?>" class="logo">
+        <img src="assets/logo-title-w-1200-400.png" alt="Delafret">
+    </a>
+
+    <div class="category">
+        <a href="/">Videospēles</a>
+        <a href="/">Tehnoloģija</a>
+        <a href="/">Filmas Un TV</a>
+        <a href="/">Izklaides</a>
+    </div>
+
+    <div class="profile">
+         <button type="button">Reģistrēties</button> 
+    </div>
+
+    <div class=misc>
+        <button type="button">Meklēt</button> 
+    </div>
 </div><?php /**PATH C:\Wamp.NET\sites\delafret.net\resources\views/components/navbar.blade.php ENDPATH**/ ?>
