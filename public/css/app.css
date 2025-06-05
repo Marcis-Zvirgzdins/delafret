@@ -20,11 +20,36 @@ body {
     padding: 12px;
 
     background-color: #232323;
-    border-radius: 0 0 20px 20px;
 }
 .navbar .logo img {
     width: 200px;
 }
 .navbar .category a {
-    color: #fff
+    color: #FFF
+}
+.button {
+    background-color: #FFD477;
+    color: #000;
+}
+.user {
+    color: #fff;
+}
+.user img {
+    height: 32px;
+}
+.category {
+    display: flex;
+    padding: 0 12px;
+
+    background-color: #232323;
+    border-radius: 0 0 12px 12px;
+}
+.category a {
+    width: 25%;
+    text-align: center;
+    margin: 12px;
+    padding: 8px;
+
+    background-color: #fff;
+    border-radius: 8px;
 }

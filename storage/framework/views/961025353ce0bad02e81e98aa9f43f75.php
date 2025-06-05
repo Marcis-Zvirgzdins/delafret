@@ -1,0 +1,1 @@
+<?php /**PATH C:\Wamp.NET\sites\delafret.net\resources\views/auth/login.blade.php ENDPATH**/ ?>
