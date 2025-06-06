@@ -46,5 +46,5 @@ unset($__errorArgs, $__bag); ?>
         <label for="password_confirmation">Apstipriniet paroli</label>
         <input id="password_confirmation" type="password" name="password_confirmation">
     </div>
-    <button type="submit">Reģistrēties</button>
+    <button type="submit" onsubmit="this.querySelector('button').disabled = true;">Reģistrēties</button>
 </form><?php /**PATH C:\Wamp.NET\sites\delafret.net\resources\views/auth/register.blade.php ENDPATH**/ ?>

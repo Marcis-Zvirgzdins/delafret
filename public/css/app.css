@@ -20,6 +20,9 @@ body {
 
     background-color: #232323;
 }
+.navbar .logo {
+    margin-left: 6px;
+}
 .navbar .logo img {
     width: 200px;
 }
@@ -31,8 +34,14 @@ body {
     margin: 4px;
 
     border: none;
-    background-color: #FFD477;
+    background-color: #f7c523;
     color: #000;
+    font-family: Outfit;
+    text-decoration: none;
+}
+.button:hover {
+    background-color: #deb11f;
+    cursor: pointer;
 }
 .user {
     color: #fff;

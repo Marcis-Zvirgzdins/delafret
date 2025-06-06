@@ -8,12 +8,18 @@
             <a href="{{ route('login') }}" class="button">Pierakstīties</a>
             <a href="{{ route('register') }}" class="button">Reģistrēties</a>
         @else
-            <div class="user">
-                {{ auth()->user()->username }}
-                <img src="assets/user-icon-blank-512.png" alt="Profile">
-            </div>
+            <a href="{{ route('profile') }}">
+                <div class="user">
+                    {{ auth()->user()->username }}
+                    @if (auth()->user()->profile_picture)
+                        <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile">
+                    @else
+                        <img src="assets/user-icon-blank-512.png" alt="Profile Picture">
+                    @endif
+                </div>
+            </a>
             
-            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+            <form method="POST" action="{{ route('logout') }}" onsubmit="this.querySelector('button').disabled = true;">
                 @csrf
                 <button type="submit" class="button">Izrakstīties</button>
             </form>
@@ -21,12 +27,12 @@
     </div>
 
     <div class=misc>
-        <button type="button">Meklēt</button> 
+        <button type="button" class="button"><img src="icons/search-b-32.svg" alt="Search"></button> 
     </div>
 </div>
 <div class="category mw14 center">
-    <a href="/">Videospēles</a>
-    <a href="/">Tehnoloģija</a>
-    <a href="/">Filmas Un TV</a>
-    <a href="/">Izklaides</a>
+    <a href="/" class="games">Videospēles</a>
+    <a href="/" class="tech">Tehnoloģija</a>
+    <a href="/" class="movies">Filmas & TV</a>
+    <a href="/" class="entertainment">Izklaides</a>
 </div>
