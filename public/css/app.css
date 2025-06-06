@@ -17,7 +17,6 @@ body {
 
 .navbar {
     display: flex;
-    padding: 12px;
 
     background-color: #232323;
 }
@@ -28,6 +27,10 @@ body {
     color: #FFF
 }
 .button {
+    padding: 8px;
+    margin: 4px;
+
+    border: none;
     background-color: #FFD477;
     color: #000;
 }
@@ -39,7 +42,6 @@ body {
 }
 .category {
     display: flex;
-    padding: 0 12px;
 
     background-color: #232323;
     border-radius: 0 0 12px 12px;
@@ -52,4 +54,10 @@ body {
 
     background-color: #fff;
     border-radius: 8px;
+}
+.profile {
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
 }
