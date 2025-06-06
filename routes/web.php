@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ArticleController;
 
 
 
@@ -27,3 +28,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'updateProfilePicture'])->name('profile.update');
     Route::delete('/profile/remove', [ProfileController::class, 'removeProfilePicture'])->name('profile.remove');
 });
+
+Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');

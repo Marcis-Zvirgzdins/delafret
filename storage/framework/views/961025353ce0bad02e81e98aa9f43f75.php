@@ -28,5 +28,9 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
     </div>
-    <button type="submit" onsubmit="this.querySelector('button').disabled = true;">Pieslēgties</button>
+
+    <form method="POST" action="<?php echo e(route('login')); ?>" onsubmit="this.querySelector('button').disabled = true;">
+        <?php echo csrf_field(); ?>
+        <button type="submit">Pieslēgties</button>
+    </form>
 </form><?php /**PATH C:\Wamp.NET\sites\delafret.net\resources\views/auth/login.blade.php ENDPATH**/ ?>

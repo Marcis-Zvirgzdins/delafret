@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        Delafret: Mans Profils
+        Delafret: Mans profils
     </x-slot>
 
     <div class="profile-picture">

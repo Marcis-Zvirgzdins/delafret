@@ -14,5 +14,9 @@
             <span class="error">{{ $message }}</span>
         @enderror
     </div>
-    <button type="submit" onsubmit="this.querySelector('button').disabled = true;">Pieslēgties</button>
+
+    <form method="POST" action="{{ route('login') }}" onsubmit="this.querySelector('button').disabled = true;">
+        @csrf
+        <button type="submit">Pieslēgties</button>
+    </form>
 </form>

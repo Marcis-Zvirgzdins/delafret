@@ -18,11 +18,18 @@
                     @endif
                 </div>
             </a>
+
             
             <form method="POST" action="{{ route('logout') }}" onsubmit="this.querySelector('button').disabled = true;">
                 @csrf
                 <button type="submit" class="button">Izrakstīties</button>
             </form>
+            
+            @can('create', App\Models\User::class)
+                <a href="{{ route('articles.create') }}" class="button">
+                    <img src="icons/add-b-32.svg" alt="Create Article">
+                </a>
+            @endcan
         @endif
     </div>
 

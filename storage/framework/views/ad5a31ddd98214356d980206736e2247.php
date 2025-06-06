@@ -19,11 +19,18 @@
                     <?php endif; ?>
                 </div>
             </a>
+
             
             <form method="POST" action="<?php echo e(route('logout')); ?>" onsubmit="this.querySelector('button').disabled = true;">
                 <?php echo csrf_field(); ?>
                 <button type="submit" class="button">Izrakstīties</button>
             </form>
+            
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create', App\Models\User::class)): ?>
+                <a href="<?php echo e(route('articles.create')); ?>" class="button">
+                    <img src="icons/add-b-32.svg" alt="Create Article">
+                </a>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 

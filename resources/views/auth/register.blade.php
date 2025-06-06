@@ -25,5 +25,9 @@
         <label for="password_confirmation">Apstipriniet paroli</label>
         <input id="password_confirmation" type="password" name="password_confirmation">
     </div>
-    <button type="submit" onsubmit="this.querySelector('button').disabled = true;">Reģistrēties</button>
+
+    <form method="POST" action="{{ route('register') }}" onsubmit="this.querySelector('button').disabled = true;">
+        @csrf
+        <button type="submit">Reģistrēties</button>
+    </form>
 </form>

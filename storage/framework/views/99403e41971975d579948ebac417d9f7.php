@@ -9,7 +9,7 @@
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
      <?php $__env->slot('title', null, []); ?> 
-        Delafret: Mans Profils
+        Delafret: Mans profils
      <?php $__env->endSlot(); ?>
 
     <div class="profile-picture">
