@@ -9,6 +9,6 @@ class ArticleController extends Controller
     {
         $this->authorize('create', \App\Models\Article::class);
 
-        return view('create');
+        return view('articles.create');
     }
 }
