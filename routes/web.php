@@ -25,9 +25,17 @@ Route::middleware(['auth'])->group(function () {
         return view('profile');
     })->name('profile');
 
+    Route::get('/profile/options', [ProfileController::class, 'options'])->name('profile.options');
     Route::post('/profile/update', [ProfileController::class, 'updateProfilePicture'])->name('profile.update');
     Route::delete('/profile/remove', [ProfileController::class, 'removeProfilePicture'])->name('profile.remove');
+
+    Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 });
 
-Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+
+Route::get('/', function () {
+    $latestArticles = \App\Models\Article::latest('published_at')->take(4)->get();
+    return view('index', compact('latestArticles'));
+})->name('index');

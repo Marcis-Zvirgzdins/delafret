@@ -8,6 +8,11 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
+    public function options()
+    {
+        return view('profile.options');
+    }
+
     public function updateProfilePicture(Request $request)
     {
         $request->validate([

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Article;
 
 class ArticleController extends Controller
 {
@@ -29,8 +30,13 @@ class ArticleController extends Controller
     
         $validated['user_id'] = auth()->id();
     
-        ArticleController::create($validated);
+        Article::create($validated);
     
         return redirect()->route('index')->with('success', 'Article created successfully!');
+    }
+
+    public function show(Article $article)
+    {
+        return view('articles.show', compact('article'));
     }
 }
