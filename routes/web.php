@@ -42,3 +42,5 @@ Route::get('/', function () {
 })->name('index');
 
 Route::post('/articles/{article}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+Route::get('/articles/category/{category}', [ArticleController::class, 'category'])->name('articles.category');

@@ -39,4 +39,16 @@ class ArticleController extends Controller
     {
         return view('articles.show', compact('article'));
     }
+
+    public function category($category)
+    {
+        $validCategories = ['games', 'tech', 'movies', 'entertainment'];
+        if (!in_array($category, $validCategories)) {
+            abort(404, 'Category not found');
+        }
+    
+        $articles = Article::where('category', $category)->latest('published_at')->paginate(10);
+
+        return view('articles.category', compact('articles', 'category'));
+    }
 }

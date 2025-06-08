@@ -3,10 +3,15 @@
 body {
     margin: 0;
 
-    /* background-color: #303030; */
+    background-color: #303030;
 }
 
 
+/* Vispārīgie noteikumi */
+.font1 {
+    font-family: "Outfit", sans-serif;
+    text-decoration: none;
+}
 .mw14 {
     max-width: 1400px;
 }
@@ -14,59 +19,115 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+.wt {
+    color: #FFF;
+    font-weight: 400;
+    font-size: 16px;
+}
 
-.navbar {
+/* Navigācijas joslas kategorijas */
+.games { background-color: #A53B3D; }
+.games:hover { background-color: #8d3334; }
+.tech { background-color: #3A72A3; }
+.tech:hover { background-color: #31608a; }
+.movies { background-color: #A554A1; }
+.movies:hover { background-color: #8d488a; }
+.entertainment { background-color: #60A554; }
+.entertainment:hover { background-color: #538f49; }
+.category a {
+    width: 25%;
+    margin: 12px 12px 12px 0;
+    padding: 8px;
+
+    text-align: center;
+    border-radius: 8px;
+}
+.category a:first-child {
+    margin-left: 12px;
+}
+
+/* Pārējā navigācijas josla */
+.all-navbar {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    
+    background-color: rgba(0.8, 0.8, 0.8, 0.75);
+    backdrop-filter: blur(8px);
+    border-radius: 0 0 12px 12px;
+}
+.navbar, .category {
     display: flex;
+}
+@media (max-width:1400px) {
+    .all-navbar {
+        border-radius: 0;
+    }
+}
 
-    background-color: #232323;
+.navbar .logo img, .navbar .logo {
+    height: 66px;
 }
 .navbar .logo {
     margin-left: 6px;
 }
-.navbar .logo img {
-    width: 200px;
-}
-.navbar .category a {
-    color: #FFF
-}
+
 .button {
     padding: 8px;
     margin: 4px;
 
     border: none;
-    background-color: #f7c523;
     color: #000;
-    font-family: Outfit;
-    text-decoration: none;
-}
-.button:hover {
-    background-color: #deb11f;
-    cursor: pointer;
-}
-.user {
-    color: #fff;
-}
-.user img {
-    height: 32px;
-}
-.category {
-    display: flex;
-
-    background-color: #232323;
-    border-radius: 0 0 12px 12px;
-}
-.category a {
-    width: 25%;
-    text-align: center;
-    margin: 12px;
-    padding: 8px;
-
-    background-color: #fff;
+    font-size: 16px;
+    background-color: #f7c523;
     border-radius: 8px;
 }
+.button:hover {
+    cursor: pointer;
+    background-color: #deb11f;
+}
+
 .profile {
     justify-content: flex-end;
     align-items: center;
     display: flex;
     flex-grow: 1;
+}
+
+.misc {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+.misc button, .create {
+    padding: 3px;
+    width: 36px;
+    height: 36px;
+}
+.misc button img, .create img, .create {
+    height: 30px;
+    width: 30px;
+}
+
+/* Navigācijas joslas profils */
+.user {
+    display: flex;
+    align-items: center;
+}
+.user img {
+    height: 36px;
+    width: 36px;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+.display-name {
+    margin-right: 8px;
+}
+.redirect {
+    text-decoration: none;
+}
+.redirect:hover {
+    text-decoration: underline;
 }

@@ -32,7 +32,7 @@
             <select id="category" name="category" required>
                 <option value="games" {{ old('category') == 'games' ? 'selected' : '' }}>Games</option>
                 <option value="tech" {{ old('category') == 'tech' ? 'selected' : '' }}>Tech</option>
-                <option value="movies" {{ old('category') == 'movies' ? 'selected' : '' }}>Movies</option>
+                <option value="movies" {{ old('category') == 'movies' ? 'selected' : '' }}>Movies And TV</option>
                 <option value="entertainment" {{ old('category') == 'entertainment' ? 'selected' : '' }}>Entertainment</option>
             </select>
             @error('category')
