@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 
 
@@ -39,3 +40,5 @@ Route::get('/', function () {
     $latestArticles = \App\Models\Article::latest('published_at')->take(4)->get();
     return view('index', compact('latestArticles'));
 })->name('index');
+
+Route::post('/articles/{article}/comments', [CommentController::class, 'store'])->name('comments.store');
