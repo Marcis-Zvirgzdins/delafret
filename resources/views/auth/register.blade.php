@@ -1,33 +1,55 @@
-<form method="POST" action="{{ route('register') }}">
-    @csrf
-    <div>
-        <label for="username">Lietotājvārds</label>
-        <input id="username" type="text" name="username" value="{{ old('username') }}">
-        @error('username')
-            <span class="error">{{ $message }}</span>
-        @enderror
-    </div>
-    <div>
-        <label for="email">E-pasts</label>
-        <input id="email" type="email" name="email" value="{{ old('email') }}">
-        @error('email')
-            <span class="error">{{ $message }}</span>
-        @enderror
-    </div>
-    <div>
-        <label for="password">Parole</label>
-        <input id="password" type="password" name="password">
-        @error('password')
-            <span class="error">{{ $message }}</span>
-        @enderror
-    </div>
-    <div>
-        <label for="password_confirmation">Apstipriniet paroli</label>
-        <input id="password_confirmation" type="password" name="password_confirmation">
-    </div>
+<x-layoutnonav>
+    <x-slot name="title">
+        Delafret: Reģistrēties
+    </x-slot>
 
-    <form method="POST" action="{{ route('register') }}" onsubmit="this.querySelector('button').disabled = true;">
-        @csrf
-        <button type="submit">Reģistrēties</button>
-    </form>
-</form>
+    <div class="login-container">
+        <div class="form-container">
+            <p class="w-title font1 ct">Izveidojiet jūsu kontu</p>
+            <form class="registration-form center" method="POST" action="{{ route('register') }}">
+                @csrf
+                <div>
+                    <input class="wt font1 first-input" placeholder="Lietotājvārds" id="username" type="text" name="username" value="{{ old('username') }}">
+                    @error('username')
+                        <span class="error rt font1">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div>
+                    <input class="wt font1" placeholder="E-Pasts" id="email" type="text" name="email" value="{{ old('email') }}">
+                    @error('email')
+                        <span class="error rt font1">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div>
+                    <div class="password-container">  
+                        <input class="wt font1" placeholder="Parole" id="password" type="password" name="password">
+                        <button class="button-pass wt font1" type="button">
+                            <img src="{{ asset('icons/visible-w-32.svg') }}" alt="Reveal">
+                        </button>
+                    </div>
+                    @error('password')
+                        <span class="error rt font1">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="password-container">
+                    <input class="wt font1" placeholder="Apstiprināt paroli" id="password_confirmation" type="password" name="password_confirmation">
+                    <button class="wt font1" type="button">
+                        <img src="{{ asset('icons/visible-w-32.svg') }}" alt="Reveal">
+                    </button>
+                </div>
+
+                <form method="POST" action="{{ route('register') }}" onsubmit="this.querySelector('button').disabled = true;">
+                    @csrf
+                    <button class="button wt font1" type="submit">Reģistrēties</button>
+                </form>
+            </form>
+            <p class="gt font1 ct exists">Eksistē konts? <a class="gt" href="{{ route('login') }}">Pieslēdzaties</a></p>
+        </div>
+        
+        <div class="benefits-container">
+            <a href="{{ route('index') }}" class="logo">
+                <img class="ds" src="{{ asset('assets/logo-title-w-1200-400.png') }}" alt="Delafret">
+            </a>
+        </div>
+    </div>
+</x-layoutnonav>

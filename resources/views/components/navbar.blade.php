@@ -1,7 +1,7 @@
-<div class="all-navbar mw14 center">
+<div class="all-navbar mw14 center ds transparent">
     <div class="navbar">
         <a href="{{ route('index') }}" class="logo">
-            <img src="{{ asset('assets/logo-title-w-1200-400.png') }}" alt="Delafret">
+            <img class="ds" src="{{ asset('assets/logo-title-w-1200-400.png') }}" alt="Delafret">
         </a>
 
         <div class="profile">
@@ -11,11 +11,11 @@
             @else
                 <a href="{{ route('profile') }}" class="redirect wt">
                     <div class="user">
-                        <span class="display-name wt font1">{{ auth()->user()->username }}</span>
+                        <span class="display-name wt font1 ds">{{ auth()->user()->username }}</span>
                         @if (auth()->user()->profile_picture)
-                            <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile">
+                            <img class="ds" src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile">
                         @else
-                            <img src="{{ asset('assets/user-icon-blank-512.png') }}" alt="Profile Picture">
+                            <img class="ds" src="{{ asset('assets/user-icon-blank-512.png') }}" alt="Profile Picture">
                         @endif
                     </div>
                 </a>

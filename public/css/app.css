@@ -2,9 +2,9 @@
 
 body {
     margin: 0;
-
     background-color: #303030;
 }
+
 
 
 /* Vispārīgie noteikumi */
@@ -19,11 +19,50 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+@media (max-width:1432px) {
+    .center16 {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}
 .wt {
     color: #FFF;
     font-weight: 400;
     font-size: 16px;
 }
+.gt {
+    color: #bfbfbf;
+    font-weight: 400;
+    font-size: 14px;
+}
+.rt {
+    color: #E5413B;
+}
+.p142 {
+    padding-top: 142px;
+}
+.ds {
+    filter: drop-shadow(0 0 8px rgba(1, 1, 1, 0.25));
+}
+.ds2 {
+    filter: drop-shadow(0 0 6px rgba(1, 1, 1, 0.4));
+}
+.transparent {
+    background-color: rgba(0.8, 0.8, 0.8, 0.55);
+    backdrop-filter: blur(8px);
+}
+.ct {
+    text-align: center;
+}
+.w-title {
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 16px 0;
+}
+
+
 
 /* Navigācijas joslas kategorijas */
 .games { background-color: #A53B3D; }
@@ -52,9 +91,8 @@ body {
     width: 100%;
     left: 0;
     right: 0;
+    z-index: 1;
     
-    background-color: rgba(0.8, 0.8, 0.8, 0.75);
-    backdrop-filter: blur(8px);
     border-radius: 0 0 12px 12px;
 }
 .navbar, .category {
@@ -119,6 +157,7 @@ body {
     height: 36px;
     width: 36px;
     align-items: center;
+    object-fit: cover;
     border-radius: 50%;
     margin-right: 4px;
 }
@@ -130,4 +169,162 @@ body {
 }
 .redirect:hover {
     text-decoration: underline;
+}
+
+/* Sākuma lapas pirmie raksti (suggested) */
+.suggested-main {
+    display: flex;
+
+    border-radius: 12px;
+    filter: drop-shadow(0 0 8px rgba(1, 1, 1, 0.2));
+}
+.suggested-main .article {
+    flex: 1;
+}
+.suggested-main .article .thumbnail {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: filter 0.2s ease;
+}
+.suggested-main .article .thumbnail:hover {
+    filter: brightness(80%);
+}
+.article-container:first-child img {
+    border-radius: 12px 0 0 12px;
+}
+.article-container:last-child img {
+    border-radius: 0 12px 12px 0;
+}
+.article-container:only-child img {
+    border-radius: 12px;
+}
+.article-container {
+    text-decoration: none;
+}
+
+.article {
+    position: relative;
+}
+.cat-label {
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+.overlay-container {
+    position: absolute;
+    
+    bottom: 4px;
+    left: 10px;
+}
+.overlay-container .text {
+    text-decoration: none;
+    color: #FFF;
+}
+.overlay-container .text:hover .title {
+    text-decoration: underline;
+}
+.overlay-container .text .date-author {
+    padding: 2px 4px;
+    width: fit-content;
+    border-radius: 4px;
+}
+.overlay-container .text .title {
+    width: fit-content;
+    font-size: 18px;
+}
+.bookmark-container img {
+    width: 30px;
+    height: 30px;
+}
+.bookmark-container {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    border-radius: 8px;
+}
+.bookmark-container:hover {
+    cursor: pointer;
+}
+
+
+/* Pieslēgšanās un reģisrēšanās */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.login-container > div {
+    flex: 1;
+}
+.benefits-container {
+    background-color: #131313;
+    height: 100%;
+}
+.benefits-container img {
+    height: 120px;
+}
+.registration-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 340px;
+}
+.registration-form input {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    margin-top: 16px;
+    width: 100%;
+
+    border: none;
+    background-color: #3D3D3D;
+    border-radius: 8px;
+}
+.registration-form div {
+    width: 100%;
+}
+.registration-form .first-input {
+    margin-top: 0;
+}
+.registration-form input:focus {
+    outline: none;
+}
+.registration-form button {
+    margin-top: 16px;
+    width: 100%;
+    padding: 12px;
+}
+#password, #password_confirmation {
+    border-radius: 8px 0 0 8px;
+}
+.password-container button {
+    height: 44px;
+    width: 44px;
+    padding: 8px;
+    
+    background-color: #3D3D3D;
+    border-radius: 0 8px 8px 0;
+    border: none;
+}
+.password-container button:hover {
+    cursor: pointer;
+}
+.password-container button img {
+    height: 28px;
+    width: 28px;
+}
+.password-container {
+    display: flex;
+    flex-direction: row;
+}
+.error {
+    font-size: 14px;
+}
+.exists {
+    margin: 16px 0;
 }
