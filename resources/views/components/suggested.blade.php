@@ -17,6 +17,7 @@
                                 <p class="gt font1 date-author ds transparent">{{ $article->published_at ? $article->published_at->format('d.m.Y') : 'Not published' }}  •  {{ $article->author }}</p>
                             </a>
                         </div>
+
                         @guest
                             <a class="bookmark-container transparent ds" href="{{ route('login') }}">
                                 <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">

@@ -43,13 +43,16 @@
                     <button class="button wt font1" type="submit">Reģistrēties</button>
                 </form>
             </form>
-            <p class="gt font1 ct exists">Eksistē konts? <a class="gt" href="{{ route('login') }}">Pieslēdzaties</a></p>
+            <p class="gt font1 ct exists">Eksistē konts? <a class="gt" href="{{ route('login') }}">Pierakstieties</a></p>
         </div>
         
         <div class="benefits-container">
             <a href="{{ route('index') }}" class="logo">
                 <img class="ds" src="{{ asset('assets/logo-title-w-1200-400.png') }}" alt="Delafret">
             </a>
+            <p class="wtl font1 ct top-p">Labāka lasīšanas pieredze</p>
+            <img class="ds arrow" src="{{ asset('icons/arrow-down-y-32.svg') }}" alt="Arrow Down">
+            <p class="wtl font1 ct">Saglabājiet jūsu mīļākos rakstus</p>
         </div>
     </div>
 </x-layoutnonav>
