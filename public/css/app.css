@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 body {
+    display: flex;
+    flex-direction: column;
     margin: 0;
+    min-height: 100vh;
+
     background-color: #303030;
 }
 
@@ -37,6 +41,11 @@ body {
 }
 .gt {
     color: #bfbfbf;
+    font-weight: 400;
+    font-size: 14px;
+}
+.gt2 {
+    color: #eaeaea;
     font-weight: 400;
     font-size: 14px;
 }
@@ -259,6 +268,9 @@ body {
     cursor: pointer;
     background-color: rgba(0.8, 0.8, 0.8, 0.7);
 }
+.container {
+    flex: 1;
+}
 
 /* Pieslēgšanās un reģisrēšanās */
 .login-container {
@@ -422,13 +434,18 @@ body {
 .article-container-container {
     display: flex;
     flex-direction: row;
+    gap: 16px;
 }
 .article-container-main {
-    max-width: 800px;
     padding: 12px;
+    margin-bottom: 16px;
 
     background-color: #3D3D3D;
     border-radius: 12px;
+}
+.article-container-main-container {
+    max-width: 800px;
+    flex-grow: 1;
 }
 .article-container-main .banner-img img {
     width: 100%;
@@ -471,6 +488,7 @@ body {
     border-radius: 8px;
     display: inline-block;
 }
+
 @media (max-width:1432px) {
     .article-container-container {
         margin-left: 16px;
@@ -486,11 +504,249 @@ body {
 .tech-text { color: #4384bd; }
 .tech-text:hover { color: #3A72A3; }
 
+/* Komentāru publicēšanas logs */
+.comment-sub-container {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
 
+    border-radius: 12px;
+    background-color: #3D3D3D;
+}
+.comment-sub-container img {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+}
+.comment-sub-container form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.comment-sub-container form textarea {
+    resize: none;
+    overflow: hidden;
+    padding: 12px;
+    height: 20px;
 
+    border: none;
+    background-color: #484848;
+    border-radius: 8px;
+}
+.comment-sub-container form textarea:focus {
+    border: none;
+    outline: none;
+}
+.comments-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 12px;
 
+    color: #FFF;
+}
+.comments-profile {
+    text-decoration: none;
+}
+.comments-profile span {
+    margin: 8px;
+}
+.comment-sub-container .button {
+    margin: 12px 0 0 0;
+}
+.comment-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
 
+    border-radius: 12px;
+    background-color: rgba(0.8, 0.8, 0.8, 0.75);
+    backdrop-filter: blur(2px);
+}
+.button-disabled {
+    background-color: #c49c1c;
+}
+.button-disabled:hover {
+    background-color: #c49c1c;
+    cursor: default;
+}
+.comment-overlay p {
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+/* Paši komentāri */
+.comment-container {
+    background-color: #3D3D3D;
+    border-radius: 12px;
+    margin-top: 16px;
+    padding: 12px;
+}
+.comment-container .comment .comment-profile img {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+}
+.comment-container .comment-title {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-top: 4px;
+}
+.comment-container .comment {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+
+    background-color: #444444;
+    border-radius: 8px;
+}
+.comment-container .empty {
+    padding: 6px;
+}
+.comment-container .empty p {
+    margin: 8px;
+}
+.comment-container > .comment:last-of-type {
+    margin-bottom: 0;
+}
+.comment .comment-profile {
+    display: flex;
+    flex-direction: row;
+}
+.comment .date {
+    margin: 0;
+}
+.comment .comment-profile .profile-name {
+    margin: 8px;
+}
+.comment-profile {
+    align-items: center;
+    padding: 8px 8px 0 8px;
+}
+.admin-badge {
+    margin: 0;
+    padding: 2px 4px;
+    border-radius: 4px;
+
+    background-color: #c22d5e;
+}
+.writer-badge {
+    margin: 0 0 0 8px;
+    padding: 2px 4px;
+    border-radius: 4px;
+
+    background-color: #25a29c;
+}
+.pub-date-comment {
+    text-align: right;
+    padding: 0 6px 4px 0;
+}
+.comment .comment-main {
+    padding: 0 8px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    text-wrap: wrap;
+}
+
+/* Komentāru dzēšanas poga */
+.delete-container img {
+    width: 18px;
+    height: 18px;
+}
+.delete-container {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+    padding: 2px;
+
+    border: none;
+    border-radius: 6px;
+    background-color: #c92b2b;
+}
+.delete-container:hover {
+    background-color: #b32626;
+    cursor: pointer;
+}
+.delete-form {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+/* Rakstu sānu mala */
 .side-container {
     flex: 1;
 }
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    border-radius: 12px;
+    background: linear-gradient(137deg,rgba(201, 12, 85, 1) 0%, rgba(250, 225, 0, 1) 100%);
+}
+.register-container img {
+    width: 70px;
+    height: 70px;
+}
+.email-bar {
+    display: flex;
+    flex-direction: row;
+    margin: 16px;
+}
+.email-bar input {
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px 0 0 8px;
+    background-color: #1E1E1E;
+}
+.email-bar input:focus {
+    outline: none;
+}
+.email-bar button {
+    padding: 12px;
+
+    border: none;
+    border-radius: 0 8px 8px 0;
+    background-color: #131313;
+}
+.email-bar button:hover {
+    cursor: pointer;
+    background-color: #000;
+}
+.subtext {
+    margin: 6px;
+}
+.main-text {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 12px;
+}
+.side-container .suggested-articles {
+    height: 400px;
+    background-color: #3D3D3D;
+    border-radius: 12px;
+}
+.side-container .like-container {
+    height: 80px;
+    background-color: #3D3D3D;
+    border-radius: 12px;
+}
+
+/* Kājene */
+.footer-container {
+    margin-top: 16px;
+    width: 100%;
+    height: 120px;
+
+    background-color: #131313;
+}

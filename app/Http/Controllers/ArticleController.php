@@ -20,9 +20,7 @@ class ArticleController extends Controller
             'thumbnail' => 'nullable|image',
             'category' => 'required|in:games,tech,movies,entertainment',
             'content' => 'required|string',
-            'author' => 'required|string|max:255',
-            'created_at' => 'nullable|date',
-            'edited_at' => 'nullable|date',
+            'author' => 'required|string|max:255'
         ]);
     
         if ($request->hasFile('thumbnail')) {
