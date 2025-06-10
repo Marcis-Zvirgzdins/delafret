@@ -66,6 +66,9 @@ body {
     text-transform: uppercase;
     margin: 16px 0;
 }
+.nowrap {
+    white-space: pre-wrap;
+}
 
 
 
@@ -421,7 +424,7 @@ body {
     flex-direction: row;
 }
 .article-container-main {
-    max-width: 900px;
+    max-width: 800px;
     padding: 12px;
 
     background-color: #3D3D3D;
@@ -434,9 +437,8 @@ body {
     object-fit: cover;
     border-radius: 8px;
 }
-.article-container-main .wt {
-    margin-top: 0;
-    margin-bottom: 12px;
+.article-container-main .title {
+    margin: 16px 0 8px 0;
 
     font-size: 24px;
     font-weight: 500;
@@ -453,6 +455,37 @@ body {
     border-radius: 6px;
     font-size: 16px;
 }
+.article-contents {
+    margin-top: 8px;
+    margin-bottom: 4px;
+
+    text-align: justify;
+}
+.aditional-info p {
+    margin: 2px;
+}
+.aditional-info {
+    margin-bottom: 12px;
+    margin-top: 12px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    display: inline-block;
+}
+@media (max-width:1432px) {
+    .article-container-container {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}
+.movies-text { color: #bd60b8; }
+.movies-text:hover { color: #A554A1; }
+.entertainment-text { color: #6fbe61; }
+.entertainment-text:hover { color: #60A554; }
+.games-text { color: #bf4547; }
+.games-text:hover { color: #A53B3D; }
+.tech-text { color: #4384bd; }
+.tech-text:hover { color: #3A72A3; }
+
 
 
 
