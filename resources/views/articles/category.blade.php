@@ -16,7 +16,7 @@
                 @endif
                 <h2><a href="{{ route('articles.show', $article->id) }}">{{ $article->title }}</a></h2>
                 <p>Autors: {{ $article->author }}</p>
-                <p>Publicēts: {{ $article->published_at ? $article->published_at->format('M d, Y') : 'Not published' }}</p>
+                <p>Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y') : 'No Date' }}</p>
             @endforeach
         </ul>
 

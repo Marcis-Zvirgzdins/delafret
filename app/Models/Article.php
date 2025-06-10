@@ -16,11 +16,7 @@ class Article extends Model
         'category',
         'content',
         'author',
-        'published_at',
-    ];
-
-    protected $casts = [
-        'published_at' => 'datetime',
+        'thumbnail_text',
     ];
 
     public function comments()

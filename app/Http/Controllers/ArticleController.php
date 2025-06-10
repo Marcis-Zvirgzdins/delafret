@@ -21,7 +21,8 @@ class ArticleController extends Controller
             'category' => 'required|in:games,tech,movies,entertainment',
             'content' => 'required|string',
             'author' => 'required|string|max:255',
-            'published_at' => 'nullable|date',
+            'created_at' => 'nullable|date',
+            'edited_at' => 'nullable|date',
         ]);
     
         if ($request->hasFile('thumbnail')) {
@@ -47,7 +48,7 @@ class ArticleController extends Controller
             abort(404, 'Category not found');
         }
     
-        $articles = Article::where('category', $category)->latest('published_at')->paginate(10);
+        $articles = Article::where('category', $category)->latest('created_at')->paginate(10);
 
         return view('articles.category', compact('articles', 'category'));
     }

@@ -1,7 +1,13 @@
 <div class="suggested-articles p142 mw14 center center16">
     <div class="suggested-main">
         @if($articles->isEmpty())
-            <p class="wt ct">Nav raksti</p>
+            <p class="wt font1 ct no-articles">Nav raksti</p>
+            <style>
+                .suggested-main {
+                    justify-content: center;
+                    background-color: #3A3A3A;
+                }
+            </style>
         @else
             @foreach($articles as $article)
                 <div class="article-container wt">
@@ -14,7 +20,7 @@
                             <a href="{{ route('articles.category', strtolower($article->category)) }}" class="cat-label ds wt font1 {{ strtolower($article->category) }}">{{ ucfirst($article->category) }}</a>
                             <a class="text" href="{{ route('articles.show', $article->id) }}">
                                 <p class="wt font1 title ds2">{{ $article->title }}</p>
-                                <p class="gt font1 date-author ds transparent">{{ $article->published_at ? $article->published_at->format('d.m.Y') : 'Not published' }}  •  {{ $article->author }}</p>
+                                <p class="gt font1 date-author ds transparent">{{ $article->created_at ? $article->created_at->format('d.m.Y') : 'No Date' }}  •  {{ $article->author }}</p>
                             </a>
                         </div>
 

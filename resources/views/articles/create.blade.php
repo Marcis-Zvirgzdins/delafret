@@ -58,15 +58,6 @@
             @enderror
         </div>
 
-        <!-- Published At -->
-        <div>
-            <label for="published_at">Publish Date</label>
-            <input type="datetime-local" id="published_at" name="published_at" value="{{ old('published_at') }}">
-            @error('published_at')
-                <p>{{ $message }}</p>
-            @enderror
-        </div>
-
         <!-- Submit Button -->
         <div>
             <button type="submit">Create Article</button>

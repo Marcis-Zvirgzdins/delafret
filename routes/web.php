@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
 Route::get('/', function () {
-    $latestArticles = \App\Models\Article::latest('published_at')->take(4)->get();
+    $latestArticles = \App\Models\Article::latest('created_at')->take(4)->get();
     return view('index', compact('latestArticles'));
 })->name('index');
 

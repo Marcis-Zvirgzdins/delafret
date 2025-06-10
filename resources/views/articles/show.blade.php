@@ -6,17 +6,25 @@
     <div class="mw14 center p142 article-container-container">
         <div class="article-container-main ds">
 
-            <p class="w-title font1">{{ $article->title }}</p>
+            <p>{{ ucfirst($article->category) }}</p>
+            
+            <p class="wt font1 ds2">{{ $article->title }}</p>
+
+            <p>Autors: {{ $article->author }}</p>
+            @if($article->updated_at && $article->updated_at != $article->created_at)
+                <p>Atjaunināts: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
+            @else
+                <p>Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
+            @endif
 
             @if($article->thumbnail)
             <div class="banner-img">
-                <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="Thumbnail for {{ $article->title }}" style="max-width: 100%; height: auto;">
+                <img class="ds" src="{{ asset('storage/' . $article->thumbnail) }}" alt="Thumbnail for {{ $article->title }}" style="max-width: 100%; height: auto;">
+                @if(!empty($article->thumbnail_text))
+                    <p class="gt font1 transparent ds">{{ $article->thumbnail_text }}</p>
+                @endif
             </div>
             @endif
-
-            <p><strong>Category:</strong> {{ ucfirst($article->category) }}</p>
-            <p><strong>Author:</strong> {{ $article->author }}</p>
-            <p>Publicēts: {{ $article->published_at ? $article->published_at->format('M d, Y') : 'Not published' }}</p>
 
             <div>
                 <p>{{ $article->content }}</p>
