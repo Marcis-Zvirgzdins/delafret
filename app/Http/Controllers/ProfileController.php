@@ -8,9 +8,9 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function options()
+    public function settings()
     {
-        return view('profile.options');
+        return view('profile.settings');
     }
 
     public function updateProfilePicture(Request $request)

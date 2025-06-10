@@ -30,7 +30,7 @@
                     @csrf
                     <button class="button wt font1" type="submit">Pieslēgties</button>
                 </form>
-            <p class="gt font1 ct exists">Neeksistē konts? <a class="gt" href="{{ route('register') }}">Reģistrējaties</a></p>
+            <p class="gt font1 ct exists">Neeksistē konts? <a class="gt" href="{{ route('register') }}">Reģistrējieties</a></p>
             </form>
         </div>
         

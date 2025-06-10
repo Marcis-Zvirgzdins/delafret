@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
         return view('profile');
     })->name('profile');
 
-    Route::get('/profile/options', [ProfileController::class, 'options'])->name('profile.options');
+    Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');
     Route::post('/profile/update', [ProfileController::class, 'updateProfilePicture'])->name('profile.update');
     Route::delete('/profile/remove', [ProfileController::class, 'removeProfilePicture'])->name('profile.remove');
 

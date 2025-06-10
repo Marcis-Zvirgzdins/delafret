@@ -12,7 +12,7 @@
             @endif
             <div class="profile-subcontainer">
                 <p class="wtl font1 ds2">{{ auth()->user()->username }}</p>
-                <a href="{{ route('profile.options') }}" class="font1 button ds">Profila iestatījumi</a>
+                <a href="{{ route('profile.settings') }}" class="font1 button ds">Profila iestatījumi</a>
             <div>
         </div>
     </div>

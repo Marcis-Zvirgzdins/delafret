@@ -414,3 +414,30 @@ body {
         margin-right: 16px;
     }
 }
+
+/* Rakstu sadaļa */
+.article-container-container {
+    display: flex;
+    flex-direction: row;
+}
+.article-container-main {
+    flex: 2;
+
+    background-color: #3D3D3D;
+    border-radius: 12px;
+}
+.article-container-main .banner-img img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+}
+
+
+
+
+
+
+.side-container {
+    flex: 1;
+}
+
