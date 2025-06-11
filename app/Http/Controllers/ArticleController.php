@@ -34,11 +34,6 @@ class ArticleController extends Controller
         return redirect()->route('index')->with('success', 'Article created successfully!');
     }
 
-    public function show(Article $article)
-    {
-        return view('articles.show', compact('article'));
-    }
-
     public function category($category)
     {
         $validCategories = ['games', 'tech', 'movies', 'entertainment'];
@@ -49,5 +44,16 @@ class ArticleController extends Controller
         $articles = Article::where('category', $category)->latest('created_at')->paginate(10);
 
         return view('articles.category', compact('articles', 'category'));
+    }
+
+    public function show(Article $article)
+    {
+        $relatedArticles = Article::where('category', $article->category)
+            ->where('id', '!=', $article->id)
+            ->latest()
+            ->take(3)
+            ->get();
+    
+        return view('articles.show', compact('article', 'relatedArticles'));
     }
 }
