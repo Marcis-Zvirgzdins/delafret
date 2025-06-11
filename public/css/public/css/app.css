@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+body {
+    margin: 0;
+
+    background-color: #303030;
+}
+
+
+.mw14 {
+    max-width: 1400px;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar {
+    display: flex;
+
+    background-color: #232323;
+}
+.navbar .logo img {
+    width: 200px;
+}
+.navbar .category a {
+    color: #FFF
+}
+.button {
+    padding: 8px;
+    margin: 4px;
+
+    border: none;
+    background-color: #FFD477;
+    color: #000;
+}
+.user {
+    color: #fff;
+}
+.user img {
+    height: 32px;
+}
+.category {
+    display: flex;
+
+    background-color: #232323;
+    border-radius: 0 0 12px 12px;
+}
+.category a {
+    width: 25%;
+    text-align: center;
+    margin: 12px;
+    padding: 8px;
+
+    background-color: #fff;
+    border-radius: 8px;
+}
+.profile {
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+}
