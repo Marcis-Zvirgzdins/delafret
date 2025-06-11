@@ -8,6 +8,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\LikeController;
+
 
 
 
@@ -57,3 +59,5 @@ Route::post('/profile/bookmarks/toggle', [BookmarkController::class, 'toggle'])
 
 
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+Route::post('/like-toggle',[LikeController::class, 'toggle'])->name('like.toggle')->middleware('auth');

@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
+
 
 class ArticleController extends Controller
 {
@@ -53,7 +55,15 @@ class ArticleController extends Controller
             ->latest()
             ->take(3)
             ->get();
-    
-        return view('articles.show', compact('article', 'relatedArticles'));
+
+        $liked = false;
+
+        if (Auth::check()) 
+        {
+            $liked = $article->likes()
+                ->where('user_id', Auth::id())
+                ->exists(); 
+        }
+        return view('articles.show', compact('article', 'relatedArticles','liked'));
     }
 }

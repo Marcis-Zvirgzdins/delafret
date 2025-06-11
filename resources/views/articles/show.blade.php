@@ -154,23 +154,39 @@
                     </style>
                 @endguest
                 <div class="like-buttons ds">
-                    <button class="wt font1 like ds" type="button">
-                        <img src="{{ asset('icons/thumb-up-w-32.svg') }}" alt="Like">
-                        <span class="font1 wt">0</span>
-                    </button>
 
-                    <div class="divider"></div>
+    {{-- Like Button --}}
+    <form method="POST" action="{{ route('like.toggle') }}" class="ds">
+        @csrf
+        <input type="hidden" name="article_id" value="{{ $article->id }}">
+        <input type="hidden" name="action" value="like">
+        <button type="submit" class="wt font1 like ds {{ $liked === 1 ? 'active' : '' }}">
+            <img src="{{ asset('icons/thumb-up-w-32.svg') }}" alt="Like">
+            <span class="font1 wt">{{ $article->likes()->where('liked', 1)->count() }}</span>
+        </button>
+    </form>
 
-                    <button class="wt font1 dislike ds" type="button">
-                        <img src="{{ asset('icons/thumb-down-w-32.svg') }}" alt="Dislike">
-                        <span class="font1 wt">0</span>
-                    </button>
+    <div class="divider"></div>
 
-                    <button class="wt font1 share ds" type="button">
-                        <img src="{{ asset('icons/link-w-32.svg') }}" alt="Dislike">
-                        <span class="font1 wt">Kopēt saiti</span>
-                    </button>
-                </div>
+    {{-- Dislike Button --}}
+    <form method="POST" action="{{ route('like.toggle') }}" class="ds">
+        @csrf
+        <input type="hidden" name="article_id" value="{{ $article->id }}">
+        <input type="hidden" name="action" value="dislike">
+        <button type="submit" class="wt font1 dislike ds {{ $liked === -1 ? 'active' : '' }}">
+            <img src="{{ asset('icons/thumb-down-w-32.svg') }}" alt="Dislike">
+            <span class="font1 wt">{{ $article->likes()->where('liked', -1)->count() }}</span>
+        </button>
+    </form>
+        <button id="kopetSaiti" class="wt font1 share ds" type="submit">
+            <img src="{{ asset('icons/link-w-32.svg') }}" alt="Share">
+            <span class="font1 wt">Kopēt saiti</span>
+        </button>
+</div>
+
+<script>
+    console.log("Article ID: {{ $article->id }}");
+</script>
             </div>
 
             <div class="related-articles ds">
@@ -209,3 +225,17 @@
         </div>
     </div>
 </x-layout>
+
+<!-- Javascript kods lai varētu kopēt saiti -->
+<!--  NESTRĀDĀ JO MUMS IR HTTP NEVIS HTTPS-->
+<script>
+    document.getElementById('kopetSaiti').addEventListener('click', function() {
+        const currentUrl = window.location.href;
+        navigator.clipboard.writeText(currentUrl).then(() => {
+            alert('Saite ir nokopēta!'); 
+        }).catch(err => {
+            console.error('Kopēšanas kļūda:', err);
+            alert('Neizdevās nokopēt saiti.');
+        });
+    });
+</script>
