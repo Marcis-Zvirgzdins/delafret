@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('category');
             $table->text('content');
             $table->string('author')->nullable();
-            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

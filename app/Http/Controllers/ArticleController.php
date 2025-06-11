@@ -20,9 +20,7 @@ class ArticleController extends Controller
             'thumbnail' => 'nullable|image',
             'category' => 'required|in:games,tech,movies,entertainment',
             'content' => 'required|string',
-            'author' => 'required|string|max:255',
-            'created_at' => 'nullable|date',
-            'edited_at' => 'nullable|date',
+            'author' => 'required|string|max:255'
         ]);
     
         if ($request->hasFile('thumbnail')) {
@@ -36,11 +34,6 @@ class ArticleController extends Controller
         return redirect()->route('index')->with('success', 'Article created successfully!');
     }
 
-    public function show(Article $article)
-    {
-        return view('articles.show', compact('article'));
-    }
-
     public function category($category)
     {
         $validCategories = ['games', 'tech', 'movies', 'entertainment'];
@@ -51,5 +44,16 @@ class ArticleController extends Controller
         $articles = Article::where('category', $category)->latest('created_at')->paginate(10);
 
         return view('articles.category', compact('articles', 'category'));
+    }
+
+    public function show(Article $article)
+    {
+        $relatedArticles = Article::where('category', $article->category)
+            ->where('id', '!=', $article->id)
+            ->latest()
+            ->take(3)
+            ->get();
+    
+        return view('articles.show', compact('article', 'relatedArticles'));
     }
 }

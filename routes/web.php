@@ -54,3 +54,6 @@ Route::middleware('auth')->group(function () {
 Route::post('/profile/bookmarks/toggle', [BookmarkController::class, 'toggle'])
     ->name('bookmarks.toggle')
     ->middleware('auth');
+
+
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');

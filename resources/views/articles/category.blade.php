@@ -3,23 +3,53 @@
         Delafret: {{ ucfirst($category) }}
     </x-slot>
 
-    <h1>{{ ucfirst($category) }}</h1>
+    <div class="suggested-articles p142 mw14 center center16">
+        <div class="category-container ds">
+            <p class="font1 ct title ds2">{{ ucfirst($category) }}</p>
 
-    @if($articles->isEmpty())
-        <p>Nav rakstu.</p>
-    @else
-        <ul>
-            @foreach($articles as $article)
-            
-                @if($article->thumbnail)
-                    <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="thumbnail">
-                @endif
-                <h2><a href="{{ route('articles.show', $article->id) }}">{{ $article->title }}</a></h2>
-                <p>Autors: {{ $article->author }}</p>
-                <p>Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y') : 'No Date' }}</p>
-            @endforeach
-        </ul>
+            @if($articles->isEmpty())
+                <div class="no-articles ds">
+                    <p class="font1 gt ct">Nav rakstu.</p>
+                </div>
+            @else
+                <div class="cat-articles">
+                    @foreach($articles as $article)
+                        <div class="cat-article ds2">
+                            <a href="{{ route('articles.show', $article->id) }}" class="image-container ds">
+                                <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="thumbnail">
+                            </a>
 
-        {{ $articles->links() }}
-    @endif
+                            <div class="article-information">
+                                <a class="article-title font1 wt" href="{{ route('articles.show', $article->id) }}">
+                                    {{ $article->title }}
+                                </a>
+
+                                <div class="aditional-info transparent ds">
+                                    <p class="font1 gt">Autors: {{ $article->author }}</p>
+                                    @if($article->updated_at && $article->updated_at != $article->created_at)
+                                        <p class="font1 gt">Atjaunināts: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
+                                    @else
+                                        <p class="font1 gt">Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
+                                    @endif
+                                </div>
+                            </div>
+
+                            @guest
+                                <a class="bookmark-container transparent ds" href="{{ route('login') }}">
+                                    <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
+                                </a>
+                            @else
+                                <a class="bookmark-container transparent ds">
+                                    <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
+                                </a>
+                            @endif
+
+                        </div>
+                    @endforeach
+                </div>
+
+                {{ $articles->links() }}
+            @endif
+        </div>
+    </div>
 </x-layout>
