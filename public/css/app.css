@@ -549,7 +549,7 @@ body {
     text-decoration: none;
 }
 .comments-profile span {
-    margin: 8px;
+    margin: 0 0 0 8px;
 }
 .comment-sub-container .button {
     margin: 12px 0 0 0;
@@ -623,21 +623,21 @@ body {
     margin: 0;
 }
 .comment .comment-profile .profile-name {
-    margin: 8px;
+    margin: 0 0 0 8px;
 }
 .comment-profile {
     align-items: center;
     padding: 8px 8px 0 8px;
 }
 .admin-badge {
-    margin: 0;
+    margin: 0 8px;
     padding: 2px 4px;
     border-radius: 4px;
 
     background-color: #c22d5e;
 }
 .writer-badge {
-    margin: 0 0 0 8px;
+    margin: 0;
     padding: 2px 4px;
     border-radius: 4px;
 
