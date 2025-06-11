@@ -146,11 +146,65 @@
             @endif
 
             <div class="like-container ds">
-                <p>Patīk vai nepatīk - youtube like bar</p>
+                @guest
+                    <style>
+                        .like-container {
+                            margin-top: 16px;
+                        }
+                    </style>
+                @endguest
+                <div class="like-buttons ds">
+                    <button class="wt font1 like ds" type="button">
+                        <img src="{{ asset('icons/thumb-up-w-32.svg') }}" alt="Like">
+                        <span class="font1 wt">0</span>
+                    </button>
+
+                    <div class="divider"></div>
+
+                    <button class="wt font1 dislike ds" type="button">
+                        <img src="{{ asset('icons/thumb-down-w-32.svg') }}" alt="Dislike">
+                        <span class="font1 wt">0</span>
+                    </button>
+
+                    <button class="wt font1 share ds" type="button">
+                        <img src="{{ asset('icons/link-w-32.svg') }}" alt="Dislike">
+                        <span class="font1 wt">Kopēt saiti</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="suggested-articles ds">
-                <p>Ieteiktie vai līdzīgie raksti</p>
+            <div class="related-articles ds">
+                <p class="font1 wtl ct related-title ds2">Turpinat lasīt</p>
+                @if($relatedArticles->isEmpty())
+                    <div class="empty ds">
+                        <p class="font1 gt ct ds">Nav saistītu rakstu</p>
+                    </div>
+                @else
+                    @foreach($relatedArticles as $related)
+                        <div class="related-container ds">
+                            <a class="related-thumbnail" href="{{ route('articles.show', $related->id) }}">
+                                <img class="ds" src="{{ asset('storage/' . $related->thumbnail) }}" alt="{{ $related->title }}">
+                            </a>
+                            <div class="side-container">
+                                <a class="category {{ strtolower($related->category) }}-text font1 wt ds" href="{{ route('articles.category', strtolower($article->category)) }}">{{ $related->category }}</a>
+                                <a class="title wt font1 ds2 title" href="{{ route('articles.show', $related->id) }}">
+                                    {{ $related->title }}
+                                </a>
+                                <p class="transparent gt font1">{{ $related->created_at->format('M d, Y') }} • {{ $related->author }}</p>
+                            </div>
+
+                            @guest
+                                <a class="bookmark-container transparent ds" href="{{ route('login') }}">
+                                    <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
+                                </a>
+                            @else
+                                <a class="bookmark-container transparent ds">
+                                    <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
+                                </a>
+                            @endif
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>
