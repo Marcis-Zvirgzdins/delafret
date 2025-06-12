@@ -17,7 +17,7 @@
                 <div>
                     <div class="password-container">  
                         <input class="wt font1" placeholder="Parole" id="password" type="password" name="password">
-                        <button class="button-pass wt font1" type="button">
+                        <button class="button-pass wt font1 @error('email') error-border-pass-btn @enderror" type="button">
                             <img src="{{ asset('icons/visible-w-32.svg') }}" alt="Reveal">
                         </button>
                     </div>
@@ -40,4 +40,5 @@
             </a>
         </div>
     </div>
+    <script src="{{ asset('js/auth.js') }}"></script>
 </x-layoutnonav>

@@ -292,7 +292,7 @@ body {
     display: flex;
     flex-direction: row;
     padding: 12px;
-    margin-top: 16px;
+    margin-top: 12px;
     width: 100%;
 
     border: none;
@@ -309,7 +309,7 @@ body {
     outline: none;
 }
 .registration-form button {
-    margin: 16px 0 0 0;
+    margin: 12px 0 0 0;
     width: 100%;
     padding: 12px;
 }
@@ -774,9 +774,11 @@ body {
     background-color: #131313;
 }
 .like-buttons .share {
+    margin-left: 12px;
+    min-width: 139px;
+
     border: none;
     border-radius: 8px;
-    margin-left: 12px;
 }
 
 /* Saistītie raksti */
@@ -1072,4 +1074,17 @@ body {
 }
 .footer-container .copyright-notice p {
     margin: 0 0 12px 0;
+}
+
+/* Raksta saites kopēšana */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+#copy-link-button:hover img {
+    animation: spin 0.4s ease-in-out;
 }
