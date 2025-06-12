@@ -35,7 +35,9 @@
                             </div>
 
                             @guest
-                                
+                                <a class="bookmark-container transparent ds" href="{{ route('login') }}">
+                                    <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
+                                </a>
                             @else
                                 @php
                                     $bookmarked = auth()->user()->bookmarks->contains('article_id', $article->id);
