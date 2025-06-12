@@ -17,10 +17,11 @@ class ArticleController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'thumbnail' => 'nullable|image',
+            'thumbnail' => 'required|image',
+            'thumbnail_text' => 'nullable|string|max:255',
             'category' => 'required|in:games,tech,movies,entertainment',
             'content' => 'required|string',
-            'author' => 'required|string|max:255'
+            'author' => 'required|string|max:255',
         ]);
     
         if ($request->hasFile('thumbnail')) {
