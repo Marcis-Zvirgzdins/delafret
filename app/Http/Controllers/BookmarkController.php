@@ -23,13 +23,11 @@ Class BookmarkController extends Controller {
 
         if ($bookmark) {
             $bookmark->delete();
-            session()->flash('message', 'Bookmark removed.');
         } else {
             Bookmark::create([
                 'user_id' => $user->id,
                 'article_id' => $articleId,
             ]);
-            session()->flash('message', 'Bookmark added.');
         }
 
         return back();

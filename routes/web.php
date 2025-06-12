@@ -61,3 +61,6 @@ Route::post('/profile/bookmarks/toggle', [BookmarkController::class, 'toggle'])
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 Route::post('/like-toggle',[LikeController::class, 'toggle'])->name('like.toggle')->middleware('auth');
+
+Route::post('/profile/language', [ProfileController::class, 'updateLanguage'])->name('profile.language.update');
+

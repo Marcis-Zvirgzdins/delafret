@@ -56,4 +56,16 @@ class ProfileController extends Controller
         
         return view('profile', compact('bookmarks'));
     }
+
+    public function updateLanguage(Request $request)
+{
+    $request->validate(['language' => 'required|string|in:EN,LV,DE',]);
+
+    $user = auth()->user();
+    $user->language = $request->language;
+    $user->save();
+
+    return back();
+}
+
 }

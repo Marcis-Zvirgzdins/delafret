@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('role')->default('user');
+            $table->string('language')->default('EN');
             $table->timestamps();
         });
 
