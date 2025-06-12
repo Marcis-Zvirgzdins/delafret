@@ -225,17 +225,3 @@
         </div>
     </div>
 </x-layout>
-
-<!-- Javascript kods lai varētu kopēt saiti -->
-<!--  NESTRĀDĀ JO MUMS IR HTTP NEVIS HTTPS-->
-<script>
-    document.getElementById('kopetSaiti').addEventListener('click', function() {
-        const currentUrl = window.location.href;
-        navigator.clipboard.writeText(currentUrl).then(() => {
-            alert('Saite ir nokopēta!'); 
-        }).catch(err => {
-            console.error('Kopēšanas kļūda:', err);
-            alert('Neizdevās nokopēt saiti.');
-        });
-    });
-</script>

@@ -5,7 +5,7 @@
 
     <div class="suggested-articles p142 mw14 center center16">
         <div class="category-container ds">
-            <p class="font1 ct title ds2">{{ ucfirst($category) }}</p>
+            <p class="font1 ct title ds" id="{{ strtolower($category) }}-cat-text">{{ ucfirst($category) }}</p>
 
             @if($articles->isEmpty())
                 <div class="no-articles ds">
