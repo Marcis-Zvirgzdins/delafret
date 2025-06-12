@@ -138,7 +138,7 @@
 
                     <div class="email-bar ds">
                         <input class="wt font1" placeholder="E-Pasts" id="email" type="text" name="email">
-                        <button class="wt font1" type="button">
+                        <button class="wt font1" type="button" id="register-button">
                             Reģistrēties
                         </button>
                     </div>
@@ -166,7 +166,7 @@
                         <span class="font1 wt">0</span>
                     </button>
 
-                    <button class="wt font1 share ds" type="button">
+                    <button class="wt font1 share ds" id="copy-link-button" type="button">
                         <img src="{{ asset('icons/link-w-32.svg') }}" alt="Dislike">
                         <span class="font1 wt">Kopēt saiti</span>
                     </button>
@@ -208,4 +208,6 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('js/view-article.js') }}"></script>
 </x-layout>

@@ -15,7 +15,7 @@
                     @enderror
                 </div>
                 <div>
-                    <input class="wt font1" placeholder="E-Pasts" id="email" type="text" name="email" value="{{ old('email') }}">
+                    <input class="wt font1" placeholder="E-Pasts" id="email" type="text" name="email" value="{{ old('email', request('email')) }}">
                     @error('email')
                         <span class="error rt font1">{{ $message }}</span>
                     @enderror
@@ -55,4 +55,6 @@
             <p class="wtl font1 ct">Saglabājiet jūsu mīļākos rakstus</p>
         </div>
     </div>
+
+    <script src="{{ asset('js/auth.js') }}"></script>
 </x-layoutnonav>
