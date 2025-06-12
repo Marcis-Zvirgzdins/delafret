@@ -43,4 +43,17 @@ class ProfileController extends Controller
 
         return back()->with('success', 'Profile picture removed successfully.');
     }
+
+    public function show()
+    {
+        $bookmarks = auth()->user()
+                          ->bookmarks()
+                          ->with(['article' => function($query) {
+                              $query->select('id', 'title', 'thumbnail', 'author');
+                          }])
+                          ->latest()
+                          ->get();
+        
+        return view('profile', compact('bookmarks'));
+    }
 }

@@ -29,9 +29,18 @@
                                 <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
                             </a>
                         @else
-                            <a class="bookmark-container transparent ds">
-                                <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
-                            </a>
+                            @php
+                                $bookmarked = auth()->user()->bookmarks->contains('article_id', $article->id);
+                            @endphp
+
+                            <form method="POST" action="{{ route('bookmarks.toggle') }}">
+                                @csrf
+                                <input type="hidden" name="article_id" value="{{ $article->id }}">
+                                
+                                <button type="submit" class="bookmark-container transparent ds" style="border: none; padding: 0;">
+                                    <img src="{{ asset($bookmarked ? 'icons/bookmark-filled-w-32.svg' : 'icons/bookmark-w-32.svg') }}" alt="Bookmark">
+                                </button>
+                            </form>
                         @endif
                     </div>
                 </div>
