@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     // Profila iestatījumu mainīšana
     Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');
     Route::post('/profile/update', [ProfileController::class, 'updateProfilePicture'])->name('profile.update');
+    Route::post('/profile/language', [ProfileController::class, 'updateLanguage'])->name('profile.language.update');
     Route::delete('/profile/remove', [ProfileController::class, 'removeProfilePicture'])->name('profile.remove');
 
     // Raksta izveidošana
