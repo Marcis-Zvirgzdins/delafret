@@ -65,6 +65,13 @@ body {
     background-color: rgba(0.8, 0.8, 0.8, 0.55);
     backdrop-filter: blur(8px);
 }
+.transparent2 {
+    background-color: rgba(0.8, 0.8, 0.8, 0.75);
+    backdrop-filter: blur(2px);
+}
+.transparent-color {
+    background-color: #1E1E1E;
+}
 .ct {
     text-align: center;
 }
@@ -565,8 +572,6 @@ body {
     align-items: center; 
 
     border-radius: 12px;
-    background-color: rgba(0.8, 0.8, 0.8, 0.75);
-    backdrop-filter: blur(2px);
 }
 .button-disabled {
     background-color: #c49c1c;
