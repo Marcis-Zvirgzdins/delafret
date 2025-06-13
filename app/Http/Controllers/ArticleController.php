@@ -57,4 +57,38 @@ class ArticleController extends Controller
     
         return view('articles.show', compact('article', 'relatedArticles'));
     }
+
+    public function translate($article_id)
+    {
+        $article = Article::findOrFail($article_id);
+
+        return view('articles.translate', compact('article'));
+    }
+
+    public function edit($article_id)
+    {
+        $article = Article::findOrFail($article_id);
+
+        return view('articles.edit', compact('article'));
+    }
+
+    public function update(Request $request, $article_id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'thumbnail_text' => 'nullable|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $article = Article::findOrFail($article_id);
+        $article->update([
+            'title' => $request->title,
+            'author' => $request->author,
+            'thumbnail_text' => $request->thumbnail_text,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('articles.show', $article->id)->with('success', 'Raksts veiksmīgi atjaunināts.');
+    }
 }

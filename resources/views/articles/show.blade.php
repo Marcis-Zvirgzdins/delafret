@@ -30,21 +30,20 @@
                 @endif
 
                 @can('edit', $article)
-                    <a class="edit-container transparent ds">
+                    <a class="edit-container transparent ds" href="{{ route('article.edit', $article->id) }}">
                         <img src="{{ asset('icons/edit-w-32.svg') }}" alt="Edit">
                     </a>
 
-                    <a class="translate-container transparent ds">
+                    <a class="translate-container transparent ds" href="{{ route('article.translate', $article->id) }}">
                         <img src="{{ asset('icons/translate-w-32.svg') }}" alt="Translate">
                     </a>
                 @endcan
 
                 <div class="aditional-info transparent-color ds">
                     <p class="font1 gt">Autors: {{ $article->author }}</p>
+                    <p class="font1 gt">Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
                     @if($article->updated_at && $article->updated_at != $article->created_at)
                         <p class="font1 gt">Atjaunināts: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
-                    @else
-                        <p class="font1 gt">Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
                     @endif
                 </div>
 
@@ -216,6 +215,20 @@
                         <img src="{{ asset('icons/link-w-32.svg') }}" alt="Dislike">
                         <span class="font1 wt">Kopēt saiti</span>
                     </button>
+                </div>
+            </div>
+
+            <div class="lang-container ds">
+                <div class="ds create-element-container cat-container dropdown-menu-lang">
+                    <label class="wt font1" for="category">Valoda</label>
+                    <select class="font1 wt" id="category" name="category" required>
+                        <option value="games">Latviešu</option>
+                        <option value="tech">Angļu</option>
+                    </select>
+                    @error('category')
+                        <p>{{ $message }}</p>
+                    @enderror
+                    <div class="end-container"></div>
                 </div>
             </div>
 

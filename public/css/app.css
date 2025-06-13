@@ -1307,3 +1307,63 @@ body {
     display: inline-block;
     margin-left: 8px;
 }
+
+/* Raksta tulkošana */
+.translate-container-container {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+}
+.translate-container-container .create-container {
+    margin: 0;
+    flex: 1;
+}
+
+/* Raksta tulkojuma izvēle */
+.side-container .lang-container {
+    margin-top: 16px;
+    padding: 12px;
+
+    background-color: #3D3D3D;
+    border-radius: 12px;
+}
+.lang-container .dropdown-menu-lang {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+}
+.lang-container .dropdown-menu-lang label, .lang-container .dropdown-menu-lang .end-container {
+    width: 80px;
+}
+.lang-container .dropdown-menu-lang .end-container {
+    padding: 8px 10px;
+    background-color: #1E1E1E;
+}
+.lang-container .dropdown-menu-lang label {
+    padding: 8px 10px;
+    border-radius: 8px 0 0 8px;
+    background-color: #1E1E1E;
+}
+.lang-container .dropdown-menu-lang select {
+    padding: 0 12px;
+
+    background-color: #1E1E1E;
+    border: none;
+    border-left: 2px solid #131313;
+    border-right: 2px solid #131313;
+}
+.lang-container .dropdown-menu-lang select:focus {
+    outline: none;
+}
+@media (max-width: 1080px) {
+    .create-container-container .create-container .lang-dropdown label, .lang-dropdown .end-container {
+        width: 100px;
+    }
+}
+@media (max-width: 800px) {
+    .create-container-container .create-container .lang-dropdown label, .lang-dropdown .end-container {
+        width: 80px;
+    }
+}

@@ -65,3 +65,10 @@ Route::middleware('auth')->group(function () {
 
 // Privātās atsauksmes publicēšana
 Route::post('/articles/{article}/feedback', [FeedbackController::class, 'store'])->name('feedback.store')->middleware('auth');
+
+// Raksta tulkošana
+Route::get('/articles/{article_id}/translate', [ArticleController::class, 'translate'])->name('article.translate')->middleware('auth');
+
+// Raksta rediģēšana un atjaunošana
+Route::get('/articles/{article_id}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware('auth');
+Route::put('/articles/{article_id}/update', [ArticleController::class, 'update'])->name('article.update')->middleware('auth');
