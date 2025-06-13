@@ -24,4 +24,17 @@
         </div>
         <button type="submit" class="btn btn-primary">Upload</button>
     </form>
+
+    <form action="{{ route('profile.language.update') }}" method="POST" class="mt-4">
+        @csrf
+        <div class="form-group">
+            <label for="language">Choose Language</label>
+            <select name="language" id="language" class="form-control">
+                <option value="en" {{ auth()->user()->language === 'en' ? 'selected' : '' }}>English</option>
+                <option value="lv" {{ auth()->user()->language === 'lv' ? 'selected' : '' }}>Latvian</option>
+                <option value="de" {{ auth()->user()->language === 'de' ? 'selected' : '' }}>German</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-secondary">Save Language</button>
+    </form>
 </x-layout>
