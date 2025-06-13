@@ -28,8 +28,9 @@ class Article extends Model
     {
         return $this->belongsTo(User::class, 'author_id');
     }
+
     public function bookmarks()
     {
-    return $this->hasMany(Bookmark::class);
+        return $this->hasMany(Bookmark::class);
     }
 }

@@ -86,8 +86,6 @@ body {
     white-space: pre-wrap;
 }
 
-
-
 /* Navigācijas joslas kategorijas */
 .games { background-color: #A53B3D; }
 .games:hover { background-color: #8d3334; }
@@ -1092,4 +1090,46 @@ body {
 }
 #copy-link-button:hover img {
     animation: spin 0.4s ease-in-out;
+}
+
+/* Grāmatzīmes ikona pogas noformējums */
+#bookmark-button {
+    border: none;
+    padding: 2px;
+    width: 28px;
+    height: 28px;
+}
+
+/* Grāmatzīmes */
+.bookmarks-container {
+    margin-top: 16px;
+    max-width: 800px;
+    padding: 12px;
+    
+    background-color: #3D3D3D;
+    border-radius: 12px;
+}
+
+/* Raksta skatīšanas papildus funkcijas (edit, translate) */
+.edit-container img, .translate-container img { 
+    width: 24px;
+    height: 24px;
+}
+.edit-container, .translate-container {
+    position: absolute;
+    top: 8px;
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    border-radius: 6px;
+}
+.edit-container:hover, .translate-container:hover {
+    cursor: pointer;
+    background-color: rgba(0.8, 0.8, 0.8, 0.7);
+}
+.edit-container {
+    right: 44px;
+}
+.translate-container {
+    right: 80px;
 }

@@ -11,7 +11,7 @@
                 <p class="wt title font1 ds2">{{ $article->title }}</p>
 
                 @guest
-                    <a class="bookmark-container transparent ds" href="{{ route('login') }}">
+                    <a class="bookmark-container transparent-color ds" href="{{ route('login') }}">
                         <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
                     </a>
                 @else
@@ -23,13 +23,23 @@
                         @csrf
                         <input type="hidden" name="article_id" value="{{ $article->id }}">
                              
-                        <button type="submit" class="bookmark-container transparent ds" style="border: none; padding: 0;">
+                        <button type="submit" class="bookmark-container transparent ds" id="bookmark-button">
                             <img src="{{ asset($bookmarked ? 'icons/bookmark-filled-w-32.svg' : 'icons/bookmark-w-32.svg') }}" alt="Bookmark">
                         </button>
                     </form>
                 @endif
 
-                <div class="aditional-info transparent ds">
+                @can('edit', $article)
+                    <a class="edit-container transparent ds">
+                        <img src="{{ asset('icons/edit-w-32.svg') }}" alt="Edit">
+                    </a>
+
+                    <a class="translate-container transparent ds">
+                        <img src="{{ asset('icons/translate-w-32.svg') }}" alt="Translate">
+                    </a>
+                @endcan
+
+                <div class="aditional-info transparent-color ds">
                     <p class="font1 gt">Autors: {{ $article->author }}</p>
                     @if($article->updated_at && $article->updated_at != $article->created_at)
                         <p class="font1 gt">Atjaunināts: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
@@ -85,7 +95,7 @@
                         <div class="button button-disabled font1 ds ct" type="submit">Publicēt</div>
                     </form>
 
-                    <div class="comment-overlay">
+                    <div class="comment-overlay transparent2">
                         <p class="font1 wtl ds2">Vēlaties komentēt?</p>
                         <a href="{{ route('register') }}" class="button font1 ds2">Reģistrējaties</a>
                     </div>
@@ -199,17 +209,30 @@
                                 <a class="title wt font1 ds2 title" href="{{ route('articles.show', $related->id) }}">
                                     {{ $related->title }}
                                 </a>
-                                <p class="transparent gt font1">{{ $related->created_at->format('M d, Y') }} • {{ $related->author }}</p>
+                                <p class="transparent-color gt font1">{{ $related->created_at->format('M d, Y') }} • {{ $related->author }}</p>
                             </div>
 
+                            <a class="bookmark-container transparent ds" href="{{ route('login') }}">
+                                <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
+                            </a>
+
+                            
                             @guest
                                 <a class="bookmark-container transparent ds" href="{{ route('login') }}">
                                     <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
                                 </a>
                             @else
-                                <a class="bookmark-container transparent ds">
-                                    <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
-                                </a>
+                                @php
+                                    $bookmarked = auth()->user()->bookmarks->contains('article_id', $related->id);
+                                @endphp
+
+                                <form method="POST" action="{{ route('bookmarks.toggle') }}">
+                                    @csrf
+                                    <input type="hidden" name="article_id" value="{{ $related->id }}">
+                                    <button type="submit" class="bookmark-container transparent ds" id="bookmark-button">
+                                        <img src="{{ asset($bookmarked ? 'icons/bookmark-filled-w-32.svg' : 'icons/bookmark-w-32.svg') }}" alt="Bookmark">
+                                    </button>
+                                </form>
                             @endif
                         </div>
                     @endforeach
