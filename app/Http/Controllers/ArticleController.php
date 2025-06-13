@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
-use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -56,15 +55,48 @@ class ArticleController extends Controller
             ->take(3)
             ->get();
 
-        $liked = false;
-
-        if (Auth::check()) 
-        {
-            $liked = $article->likes()
-                ->where('user_id', Auth::id())
-                ->exists(); 
+         $liked = null;
+        if (auth()->check()) {
+            $like = $article->likes()->where('user_id', auth()->id())->first();
+            if ($like) {
+                $liked = $like->liked;
+            }
         }
-    
-        return view('articles.show', compact('article', 'relatedArticles','liked'));
+
+        return view('articles.show', compact('article', 'relatedArticles', 'liked'));
+    }
+
+    public function translate($article_id)
+    {
+        $article = Article::findOrFail($article_id);
+
+        return view('articles.translate', compact('article'));
+    }
+
+    public function edit($article_id)
+    {
+        $article = Article::findOrFail($article_id);
+
+        return view('articles.edit', compact('article'));
+    }
+
+    public function update(Request $request, $article_id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'thumbnail_text' => 'nullable|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $article = Article::findOrFail($article_id);
+        $article->update([
+            'title' => $request->title,
+            'author' => $request->author,
+            'thumbnail_text' => $request->thumbnail_text,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('articles.show', $article->id)->with('success', 'Raksts veiksmīgi atjaunināts.');
     }
 }

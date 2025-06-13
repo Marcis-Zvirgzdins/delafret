@@ -30,21 +30,20 @@
                 @endif
 
                 @can('edit', $article)
-                    <a class="edit-container transparent ds">
+                    <a class="edit-container transparent ds" href="{{ route('article.edit', $article->id) }}">
                         <img src="{{ asset('icons/edit-w-32.svg') }}" alt="Edit">
                     </a>
 
-                    <a class="translate-container transparent ds">
+                    <a class="translate-container transparent ds" href="{{ route('article.translate', $article->id) }}">
                         <img src="{{ asset('icons/translate-w-32.svg') }}" alt="Translate">
                     </a>
                 @endcan
 
                 <div class="aditional-info transparent-color ds">
                     <p class="font1 gt">Autors: {{ $article->author }}</p>
+                    <p class="font1 gt">Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
                     @if($article->updated_at && $article->updated_at != $article->created_at)
                         <p class="font1 gt">Atjaunināts: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
-                    @else
-                        <p class="font1 gt">Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
                     @endif
                 </div>
 
@@ -77,8 +76,14 @@
                                     <p class="admin-badge font1 gt2 ds">Admin</p>
                             @endif
                             @if(auth()->user()->id === $article->user_id)
-                                <p class="writer-badge font1 gt2 ds">Author</p>
+                                <p class="writer-badge font1 gt2 ds @if(auth()->user()->role != 'admin') mleft-8 @endif">Author</p>
                             @endif
+
+                            <label class="checkbox-container font1 gt ds">
+                                <input type="checkbox" name="private" value="1" class="custom-checkbox">
+                                <span class="checkmark"></span>
+                                Privāts komentārs
+                            </label>
                         </div>
                         <textarea class="font1 wt ds" id="content" name="content" rows="3" required></textarea>
                         <button class="button font1 ds" type="submit">Publicēt</button>
@@ -122,7 +127,7 @@
                                     <p class="admin-badge font1 gt2 ds">Admin</p>
                                 @endif
                                 @if($comment->user->id === $article->user_id)
-                                    <p class="writer-badge font1 gt2 ds">Author</p>
+                                    <p class="writer-badge font1 gt2 ds @if($comment->user->role != 'admin') mleft-8 @endif">Author</p>
                                 @endif
                             </div>
 
@@ -145,6 +150,27 @@
                     @endforeach
                 @endif
             </div>
+
+            @can('edit', $article)
+                <div class="comment-container ds private-comments">
+                    <p class="font1 wtl ct comment-title ds2">Privātas atsauksmes</p>
+                    @if($article->feedback->isEmpty())
+                        <div class="comment empty ds">
+                            <p class="font1 gt ct ds">Nav privātu atsauksmju.</p>
+                        </div>
+                    @else
+                        @foreach($article->feedback as $feedback)
+                            <div class="comment ds">
+                                <div class="comment-profile">
+                                    <p class="font1 gt2 profile-name ds2">{{ $feedback->user->username }}</p>
+                                </div>
+                                <p class="font1 wt comment-main">{{ $feedback->content }}</p>
+                                <p class="font1 date gt pub-date-comment">{{ $feedback->created_at->format('M d, Y, H:i') }}</p>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            @endcan
 
         </div>
         <div class="side-container">
@@ -173,27 +199,24 @@
                     </style>
                 @endguest
                 <div class="like-buttons ds">
-
-                    {{-- Like Button --}}
                     <form method="POST" action="{{ route('like.toggle') }}" class="ds">
                         @csrf
                         <input type="hidden" name="article_id" value="{{ $article->id }}">
                         <input type="hidden" name="action" value="like">
                         <button type="submit" class="wt font1 like ds {{ $liked === 1 ? 'active' : '' }}">
-                            <img src="{{ asset('icons/thumb-up-w-32.svg') }}" alt="Like">
+                            <img src="{{ asset($liked === 1 ? 'icons/thumb-up-filled-w-32.svg' : 'icons/thumb-up-w-32.svg') }}" alt="Like">
                             <span class="font1 wt">{{ $article->likes()->where('liked', 1)->count() }}</span>
                         </button>
                     </form>
 
                     <div class="divider"></div>
 
-                    {{-- Dislike Button --}}
                     <form method="POST" action="{{ route('like.toggle') }}" class="ds">
                         @csrf
                         <input type="hidden" name="article_id" value="{{ $article->id }}">
                         <input type="hidden" name="action" value="dislike">
                         <button type="submit" class="wt font1 dislike ds {{ $liked === -1 ? 'active' : '' }}">
-                            <img src="{{ asset('icons/thumb-down-w-32.svg') }}" alt="Dislike">
+                            <img src="{{ asset($liked === -1 ? 'icons/thumb-down-filled-w-32.svg' : 'icons/thumb-down-w-32.svg') }}" alt="Dislike">
                             <span class="font1 wt">{{ $article->likes()->where('liked', -1)->count() }}</span>
                         </button>
                     </form>
@@ -202,6 +225,20 @@
                         <img src="{{ asset('icons/link-w-32.svg') }}" alt="Dislike">
                         <span class="font1 wt">Kopēt saiti</span>
                     </button>
+                </div>
+            </div>
+
+            <div class="lang-container ds">
+                <div class="ds create-element-container cat-container dropdown-menu-lang">
+                    <label class="wt font1" for="category">Valoda</label>
+                    <select class="font1 wt" id="category" name="category" required>
+                        <option value="games">Latviešu</option>
+                        <option value="tech">Angļu</option>
+                    </select>
+                    @error('category')
+                        <p>{{ $message }}</p>
+                    @enderror
+                    <div class="end-container"></div>
                 </div>
             </div>
 

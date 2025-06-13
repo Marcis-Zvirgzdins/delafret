@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Feedback;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -12,14 +13,25 @@ class CommentController extends Controller
     {
         $request->validate([
             'content' => 'required|string|max:1000',
+            'private' => 'nullable|boolean',
         ]);
 
-        $article->comments()->create([
-            'user_id' => auth()->id(),
-            'content' => $request->content,
-        ]);
+        if ($request->private) {
+            Feedback::create([
+                'article_id' => $article->id,
+                'user_id' => auth()->id(),
+                'content' => $request->content,
+            ]);
+        } 
+        else {
+            Comment::create([
+                'article_id' => $article->id,
+                'user_id' => auth()->id(),
+                'content' => $request->content,
+            ]);
+        }
 
-        return redirect()->route('articles.show', $article->id)->with('success', 'Comment added successfully!');
+        return redirect()->back()->with('success', 'Komentārs veiksmīgi pievienots.');
     }
 
     public function destroy(Comment $comment)

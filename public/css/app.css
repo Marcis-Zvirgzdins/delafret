@@ -387,16 +387,32 @@ body {
 .benefits-container .top-p {
     margin-top: 16px;
 }
+#nml {
+    margin-left: 0;
+}
 @media(max-width:1000px) {
     .benefits-container p, .benefits-container .arrow {
         display: none;
     }
     .benefits-container {
+        display: flex;
+        flex-direction: row-reverse;
         width: 100%;
         height: auto;
+        align-items: center;
     }
-    .benefits-container a img {
+    .benefits-container .logo img {
         height: 80px;
+    }
+    .benefits-container .logo {
+        display: flex;
+        flex-grow: 1;
+        margin-right: 16px;
+    }
+    body .benefits-container .footer-container {
+        margin: 16px;
+        justify-content: flex-start;
+        flex: 0;
     }
 }
 
@@ -1013,8 +1029,6 @@ body {
     left: 12px;
     padding: 2px 4px;
 
-    background-color: rgba(0.8, 0.8, 0.8, 0.55);
-    backdrop-filter: blur(8px);
     font-family: "Outfit", sans-serif;
     text-decoration: none;
     color: #bfbfbf;
@@ -1067,6 +1081,8 @@ body {
 .footer-container .copyright-notice {
     display: flex;
     flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
 
     text-align: center;
 }
@@ -1077,6 +1093,55 @@ body {
 }
 .footer-container .copyright-notice p {
     margin: 0 0 12px 0;
+}
+.footer-container .aditional-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    margin-left: 16px;
+}
+.footer-container .aditional-info-container .lang .flag {
+    height: 25px;
+}
+.footer-container .aditional-info-container img {
+    height: 25px;
+    position: relative;
+    border-radius: 6px 0 0 6px;
+}
+.footer-container .lang {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 6px;
+
+    background-color: #272727;
+}
+.footer-container .lang .c-label {
+    margin: 0 8px;
+}
+.footer-container .lang .c-label:hover {
+    text-decoration: underline;
+}
+.footer-container .aditional-info-container img:hover {
+    filter: brightness(80%);
+}
+.spacer-div-footer {
+    width: 117px;
+
+}
+@media(max-width: 800px) {
+    .spacer-div-footer {
+        width: 0px;
+    }
+}
+.benefits-container .footer-container {
+    margin-top: auto;
+    margin-bottom: 16px;
+}
+.benefits-container .benefits-spacer {
+    height: 82px;
+    margin-bottom: auto;
 }
 
 /* Raksta saites kopēšana */
@@ -1109,6 +1174,79 @@ body {
     background-color: #3D3D3D;
     border-radius: 12px;
 }
+@media (max-width: 870px) {
+    .bookmarks-container {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}
+.bookmarks-container .title  {
+    padding: 4px;
+    margin-top: 4px;
+    margin-bottom: 16px;
+
+    font-weight: 500;
+    font-size: 24px;
+}
+.bookmarks-container .empty {
+    padding: 6px;
+
+    border-radius: 8px;
+    background-color: #444444;
+}
+.bookmarks-container .empty p {
+    margin: 8px;
+}
+.bookmarks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.bookmarks-list .bookmarked-article {
+    display: flex;
+    flex-direction: row;
+
+    border-radius: 8px;
+    background-color: #444444;
+}
+.bookmarks-list .bookmarked-article .bookmark-details {
+    display: flex;
+    flex: 5;
+    flex-direction: column;
+    padding: 12px;
+}
+.bookmarks-list .bookmarked-article .bookmark-thumbnail {
+    flex: 4;
+    height: 200px;
+}
+.bookmarks-list .bookmarked-article .bookmark-thumbnail img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+
+    border-radius: 8px 0 0 8px;
+}
+.bookmarks-list .bookmarked-article .bookmark-thumbnail img:hover {
+    filter: brightness(80%) drop-shadow(0 0 8px rgba(1, 1, 1, 0.25));
+}
+.bookmarks-list .bookmark-details .extra-info-box {
+    border-radius: 8px;
+    padding: 4px 8px;
+    width: fit-content;
+}
+.bookmarks-list .bookmark-details .extra-info-box p {
+    margin: 2px;
+}
+.bookmarks-list .bookmarked-article .bookmark-details .bookmark-title {
+    flex: 1;
+    font-size: 22px;
+}
+.bookmarks-list .bookmarked-article .bookmark-details .bookmark-title:hover {
+    text-decoration: underline;
+}
+.bookmarks-list .bookmarked-article .bookmark-details .category {
+    margin-bottom: 4px;
+}
 
 /* Raksta skatīšanas papildus funkcijas (edit, translate) */
 .edit-container img, .translate-container img { 
@@ -1132,4 +1270,100 @@ body {
 }
 .translate-container {
     right: 80px;
+}
+
+/* Papildus komentāru noformējums */
+.mleft-8 {
+    margin-left: 8px;
+}
+.private-comments .comment .comment-profile p {
+    margin: 0;
+}
+
+/* Privāta komentāra ķeksis */
+.checkbox-container {
+    margin-right: 0;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+
+    background-color: #484848;
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.custom-checkbox {
+    width: 16px;
+    height: 16px;
+
+    accent-color: #f7c523;
+    cursor: pointer;
+}
+.checkbox-container:hover .custom-checkbox {
+    accent-color: #deb11f;
+}
+
+.checkmark {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+/* Raksta tulkošana */
+.translate-container-container {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+}
+.translate-container-container .create-container {
+    margin: 0;
+    flex: 1;
+}
+
+/* Raksta tulkojuma izvēle */
+.side-container .lang-container {
+    margin-top: 16px;
+    padding: 12px;
+
+    background-color: #3D3D3D;
+    border-radius: 12px;
+}
+.lang-container .dropdown-menu-lang {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+}
+.lang-container .dropdown-menu-lang label, .lang-container .dropdown-menu-lang .end-container {
+    width: 80px;
+}
+.lang-container .dropdown-menu-lang .end-container {
+    padding: 8px 10px;
+    background-color: #1E1E1E;
+}
+.lang-container .dropdown-menu-lang label {
+    padding: 8px 10px;
+    border-radius: 8px 0 0 8px;
+    background-color: #1E1E1E;
+}
+.lang-container .dropdown-menu-lang select {
+    padding: 0 12px;
+
+    background-color: #1E1E1E;
+    border: none;
+    border-left: 2px solid #131313;
+    border-right: 2px solid #131313;
+}
+.lang-container .dropdown-menu-lang select:focus {
+    outline: none;
+}
+@media (max-width: 1080px) {
+    .create-container-container .create-container .lang-dropdown label, .lang-dropdown .end-container {
+        width: 100px;
+    }
+}
+@media (max-width: 800px) {
+    .create-container-container .create-container .lang-dropdown label, .lang-dropdown .end-container {
+        width: 80px;
+    }
 }

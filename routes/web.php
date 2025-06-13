@@ -32,7 +32,6 @@ Route::middleware(['auth'])->group(function () {
     // Profila iestatījumu mainīšana
     Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');
     Route::post('/profile/update', [ProfileController::class, 'updateProfilePicture'])->name('profile.update');
-    Route::post('/profile/language', [ProfileController::class, 'updateLanguage'])->name('profile.language.update');
     Route::delete('/profile/remove', [ProfileController::class, 'removeProfilePicture'])->name('profile.remove');
 
     // Raksta izveidošana
@@ -64,6 +63,16 @@ Route::post('/bookmarks/toggle', [BookmarkController::class, 'toggle'])->name('b
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 });
+
+// Privātās atsauksmes publicēšana
+Route::post('/articles/{article}/feedback', [FeedbackController::class, 'store'])->name('feedback.store')->middleware('auth');
+
+// Raksta tulkošana
+Route::get('/articles/{article_id}/translate', [ArticleController::class, 'translate'])->name('article.translate')->middleware('auth');
+
+// Raksta rediģēšana un atjaunošana
+Route::get('/articles/{article_id}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware('auth');
+Route::put('/articles/{article_id}/update', [ArticleController::class, 'update'])->name('article.update')->middleware('auth');
 
 // Patīk / nepatīk
 Route::post('/like-toggle',[LikeController::class, 'toggle'])->name('like.toggle')->middleware('auth');
