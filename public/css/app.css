@@ -387,16 +387,32 @@ body {
 .benefits-container .top-p {
     margin-top: 16px;
 }
+#nml {
+    margin-left: 0;
+}
 @media(max-width:1000px) {
     .benefits-container p, .benefits-container .arrow {
         display: none;
     }
     .benefits-container {
+        display: flex;
+        flex-direction: row-reverse;
         width: 100%;
         height: auto;
+        align-items: center;
     }
-    .benefits-container a img {
+    .benefits-container .logo img {
         height: 80px;
+    }
+    .benefits-container .logo {
+        display: flex;
+        flex-grow: 1;
+        margin-right: 16px;
+    }
+    body .benefits-container .footer-container {
+        margin: 16px;
+        justify-content: flex-start;
+        flex: 0;
     }
 }
 
@@ -1065,6 +1081,8 @@ body {
 .footer-container .copyright-notice {
     display: flex;
     flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
 
     text-align: center;
 }
@@ -1075,6 +1093,55 @@ body {
 }
 .footer-container .copyright-notice p {
     margin: 0 0 12px 0;
+}
+.footer-container .aditional-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    margin-left: 16px;
+}
+.footer-container .aditional-info-container .lang .flag {
+    height: 25px;
+}
+.footer-container .aditional-info-container img {
+    height: 25px;
+    position: relative;
+    border-radius: 6px 0 0 6px;
+}
+.footer-container .lang {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 6px;
+
+    background-color: #272727;
+}
+.footer-container .lang .c-label {
+    margin: 0 8px;
+}
+.footer-container .lang .c-label:hover {
+    text-decoration: underline;
+}
+.footer-container .aditional-info-container img:hover {
+    filter: brightness(80%);
+}
+.spacer-div-footer {
+    width: 117px;
+
+}
+@media(max-width: 800px) {
+    .spacer-div-footer {
+        width: 0px;
+    }
+}
+.benefits-container .footer-container {
+    margin-top: auto;
+    margin-bottom: 16px;
+}
+.benefits-container .benefits-spacer {
+    height: 82px;
+    margin-bottom: auto;
 }
 
 /* Raksta saites kopēšana */

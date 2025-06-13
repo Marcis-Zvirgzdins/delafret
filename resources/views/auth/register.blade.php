@@ -47,12 +47,26 @@
         </div>
         
         <div class="benefits-container">
+            <div class="benefits-spacer"></div>
             <a href="{{ route('index') }}" class="logo">
                 <img class="ds" src="{{ asset('assets/logo-title-w-1200-400.png') }}" alt="Delafret">
             </a>
             <p class="wtl font1 ct top-p">Labāka lasīšanas pieredze</p>
             <img class="ds arrow" src="{{ asset('icons/arrow-down-y-32.svg') }}" alt="Arrow Down">
             <p class="wtl font1 ct">Saglabājiet jūsu mīļākos rakstus</p>
+
+            <div class="footer-container">
+                <div class="aditional-info-container" id="nml">
+                    <div class="lang ds">
+                        <a class="flag" href="{{ route('index') }}"><img class="ds center" src="{{ asset('assets/lv.svg') }}" alt="LV"></a>
+                        <a class="c-label font1 gt" href="{{ route('index') }}">Latviešu</a>
+                    </div>
+                    <div class="lang ds">
+                        <a class="flag" href="{{ route('index') }}"><img class="ds center" src="{{ asset('assets/us.svg') }}" alt="US"></a>
+                        <a class="c-label font1 gt" href="{{ route('index') }}">English</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
