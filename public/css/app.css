@@ -1013,8 +1013,6 @@ body {
     left: 12px;
     padding: 2px 4px;
 
-    background-color: rgba(0.8, 0.8, 0.8, 0.55);
-    backdrop-filter: blur(8px);
     font-family: "Outfit", sans-serif;
     text-decoration: none;
     color: #bfbfbf;
@@ -1109,6 +1107,79 @@ body {
     background-color: #3D3D3D;
     border-radius: 12px;
 }
+@media (max-width: 870px) {
+    .bookmarks-container {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}
+.bookmarks-container .title  {
+    padding: 4px;
+    margin-top: 4px;
+    margin-bottom: 16px;
+
+    font-weight: 500;
+    font-size: 24px;
+}
+.bookmarks-container .empty {
+    padding: 6px;
+
+    border-radius: 8px;
+    background-color: #444444;
+}
+.bookmarks-container .empty p {
+    margin: 8px;
+}
+.bookmarks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.bookmarks-list .bookmarked-article {
+    display: flex;
+    flex-direction: row;
+
+    border-radius: 8px;
+    background-color: #444444;
+}
+.bookmarks-list .bookmarked-article .bookmark-details {
+    display: flex;
+    flex: 5;
+    flex-direction: column;
+    padding: 12px;
+}
+.bookmarks-list .bookmarked-article .bookmark-thumbnail {
+    flex: 4;
+    height: 200px;
+}
+.bookmarks-list .bookmarked-article .bookmark-thumbnail img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+
+    border-radius: 8px 0 0 8px;
+}
+.bookmarks-list .bookmarked-article .bookmark-thumbnail img:hover {
+    filter: brightness(80%) drop-shadow(0 0 8px rgba(1, 1, 1, 0.25));
+}
+.bookmarks-list .bookmark-details .extra-info-box {
+    border-radius: 8px;
+    padding: 4px 8px;
+    width: fit-content;
+}
+.bookmarks-list .bookmark-details .extra-info-box p {
+    margin: 2px;
+}
+.bookmarks-list .bookmarked-article .bookmark-details .bookmark-title {
+    flex: 1;
+    font-size: 22px;
+}
+.bookmarks-list .bookmarked-article .bookmark-details .bookmark-title:hover {
+    text-decoration: underline;
+}
+.bookmarks-list .bookmarked-article .bookmark-details .category {
+    margin-bottom: 4px;
+}
 
 /* Raksta skatīšanas papildus funkcijas (edit, translate) */
 .edit-container img, .translate-container img { 
@@ -1132,4 +1203,40 @@ body {
 }
 .translate-container {
     right: 80px;
+}
+
+/* Papildus komentāru noformējums */
+.mleft-8 {
+    margin-left: 8px;
+}
+.private-comments .comment .comment-profile p {
+    margin: 0;
+}
+
+/* Privāta komentāra ķeksis */
+.checkbox-container {
+    margin-right: 0;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+
+    background-color: #484848;
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.custom-checkbox {
+    width: 16px;
+    height: 16px;
+
+    accent-color: #f7c523;
+    cursor: pointer;
+}
+.checkbox-container:hover .custom-checkbox {
+    accent-color: #deb11f;
+}
+
+.checkmark {
+    display: inline-block;
+    margin-left: 8px;
 }

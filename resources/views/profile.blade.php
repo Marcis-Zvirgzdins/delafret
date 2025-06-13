@@ -4,7 +4,6 @@
     </x-slot>
     
     <div class="mw14 center p142 profile-container-container">
-        <!-- Profile Container -->
         <div class="profile-container ds">
             @if (auth()->user()->profile_picture)
                 <img class="ds" src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Picture">
@@ -19,26 +18,34 @@
     </div>
 
     <div class="mw center bookmarks-container ds">
-        <h2 class="font1 ds2 mb-3">Grāmatzīmes</h2>
+        <p class="font1 ds2 wt ct title ds2">Grāmatzīmes</p>
         
         @if($bookmarks->count() > 0)
             <div class="bookmarks-list">
                 @foreach($bookmarks as $bookmark)
-                    <a href="{{ route('articles.show', $bookmark->article->id) }}" class="bookmark-item ds">
-                        @if($bookmark->article->thumbnail)
-                            <img src="{{ asset('storage/' . $bookmark->article->thumbnail) }}" 
-                                 alt="{{ $bookmark->article->title }}" 
-                                 class="bookmark-image">
-                        @endif
+                    <div class="bookmarked-article ds">
+                        <a href="{{ route('articles.show', $bookmark->article->id) }}" class="bookmark-thumbnail ds">
+                            <img src="{{ asset('storage/' . $bookmark->article->thumbnail) }}" alt="{{ $bookmark->article->title }}" class="bookmark-image">
+                        </a>
                         <div class="bookmark-details">
-                            <h3 class="font1">{{ $bookmark->article->title }}</h3>
-                            <p class="text-muted">Pievienots: {{ $bookmark->created_at->format('d.m.Y') }}</p>
+                            <a class="category {{ strtolower($bookmark->article->category) }}-text font1 wt ds" 
+                               href="{{ route('articles.category', ['category' => strtolower($bookmark->article->category)]) }}">
+                                {{ ucfirst($bookmark->article->category) }}
+                            </a>
+                        
+                            <a href="{{ route('articles.show', $bookmark->article->id) }}" class="bookmark-title font1 wt">{{ $bookmark->article->title }}</a>
+                            <div class="extra-info-box transparent-color">
+                                <p class="gt font1">Pievienots: {{ $bookmark->created_at->format('d.m.Y') }}</p>
+                                <p class="date gt font1">{{ $bookmark->article->created_at->format('M d, Y') }} • {{ $bookmark->article->author }}</p>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 @endforeach
             </div>
         @else
-            <p class="ds">Jums vēl nav pievienotu grāmatzīmju.</p>
+            <div class="empty ds">
+                <p class="font1 gt ct">Jums nav pievienotu grāmatzīmju.</p>
+            </div>
         @endif
     </div>
 </x-layout>

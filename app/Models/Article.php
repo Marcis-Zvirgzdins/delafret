@@ -33,8 +33,14 @@ class Article extends Model
     {
         return $this->hasMany(Bookmark::class);
     }
-    public function likes()
+
+    public function article()
     {
-        return $this->hasMany(Like::class);
+        return $this->belongsTo(Article::class);
+    }
+
+    public function feedback()
+    {
+        return $this->hasMany(Feedback::class);
     }
 }

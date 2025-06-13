@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const fileNameElement = document.createElement('p');
                 fileNameElement.id = 'file-name';
+                fileNameElement.classList.add('transparent');
                 fileNameElement.textContent = file.name
                 previewContainer.appendChild(fileNameElement);
             };

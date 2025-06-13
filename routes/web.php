@@ -8,7 +8,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
-use App\Http\Controllers\LikeController;
 
 // Index faila atgriežšana
 Route::get('/', function () {
@@ -32,7 +31,6 @@ Route::middleware(['auth'])->group(function () {
     // Profila iestatījumu mainīšana
     Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');
     Route::post('/profile/update', [ProfileController::class, 'updateProfilePicture'])->name('profile.update');
-    Route::post('/profile/language', [ProfileController::class, 'updateLanguage'])->name('profile.language.update');
     Route::delete('/profile/remove', [ProfileController::class, 'removeProfilePicture'])->name('profile.remove');
 
     // Raksta izveidošana
@@ -65,5 +63,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 });
 
-// Patīk / nepatīk
-Route::post('/like-toggle',[LikeController::class, 'toggle'])->name('like.toggle')->middleware('auth');
+// Privātās atsauksmes publicēšana
+Route::post('/articles/{article}/feedback', [FeedbackController::class, 'store'])->name('feedback.store')->middleware('auth');

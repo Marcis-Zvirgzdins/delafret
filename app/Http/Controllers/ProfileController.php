@@ -49,21 +49,11 @@ class ProfileController extends Controller
         $bookmarks = auth()->user()
                           ->bookmarks()
                           ->with(['article' => function($query) {
-                              $query->select('id', 'title', 'thumbnail', 'author');
+                              $query->select('id', 'title', 'thumbnail', 'author', 'category', 'created_at');
                           }])
                           ->latest()
                           ->get();
         
         return view('profile', compact('bookmarks'));
-    }
-    public function updateLanguage(Request $request)
-    {
-        $request->validate(['language' => 'required|string|in:en,lv',]);
-
-        $user = auth()->user();
-        $user->language = $request->language;
-        $user->save();
-
-        return back();
     }
 }
