@@ -32,7 +32,6 @@
             <select name="language" id="language" class="form-control">
                 <option value="en" {{ auth()->user()->language === 'en' ? 'selected' : '' }}>English</option>
                 <option value="lv" {{ auth()->user()->language === 'lv' ? 'selected' : '' }}>Latvian</option>
-                <option value="de" {{ auth()->user()->language === 'de' ? 'selected' : '' }}>German</option>
             </select>
         </div>
         <button type="submit" class="btn btn-secondary">Save Language</button>
