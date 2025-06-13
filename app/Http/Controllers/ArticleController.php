@@ -54,8 +54,16 @@ class ArticleController extends Controller
             ->latest()
             ->take(3)
             ->get();
-    
-        return view('articles.show', compact('article', 'relatedArticles'));
+
+         $liked = null;
+        if (auth()->check()) {
+            $like = $article->likes()->where('user_id', auth()->id())->first();
+            if ($like) {
+                $liked = $like->liked;
+            }
+        }
+
+        return view('articles.show', compact('article', 'relatedArticles', 'liked'));
     }
 
     public function translate($article_id)

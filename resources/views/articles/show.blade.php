@@ -199,17 +199,27 @@
                     </style>
                 @endguest
                 <div class="like-buttons ds">
-                    <button class="wt font1 like ds" type="button">
-                        <img src="{{ asset('icons/thumb-up-w-32.svg') }}" alt="Like">
-                        <span class="font1 wt">0</span>
-                    </button>
+                    <form method="POST" action="{{ route('like.toggle') }}" class="ds">
+                        @csrf
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
+                        <input type="hidden" name="action" value="like">
+                        <button type="submit" class="wt font1 like ds {{ $liked === 1 ? 'active' : '' }}">
+                            <img src="{{ asset($liked === 1 ? 'icons/thumb-up-filled-w-32.svg' : 'icons/thumb-up-w-32.svg') }}" alt="Like">
+                            <span class="font1 wt">{{ $article->likes()->where('liked', 1)->count() }}</span>
+                        </button>
+                    </form>
 
                     <div class="divider"></div>
 
-                    <button class="wt font1 dislike ds" type="button">
-                        <img src="{{ asset('icons/thumb-down-w-32.svg') }}" alt="Dislike">
-                        <span class="font1 wt">0</span>
-                    </button>
+                    <form method="POST" action="{{ route('like.toggle') }}" class="ds">
+                        @csrf
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
+                        <input type="hidden" name="action" value="dislike">
+                        <button type="submit" class="wt font1 dislike ds {{ $liked === -1 ? 'active' : '' }}">
+                            <img src="{{ asset($liked === -1 ? 'icons/thumb-down-filled-w-32.svg' : 'icons/thumb-down-w-32.svg') }}" alt="Dislike">
+                            <span class="font1 wt">{{ $article->likes()->where('liked', -1)->count() }}</span>
+                        </button>
+                    </form>
 
                     <button class="wt font1 share ds" id="copy-link-button" type="button">
                         <img src="{{ asset('icons/link-w-32.svg') }}" alt="Dislike">

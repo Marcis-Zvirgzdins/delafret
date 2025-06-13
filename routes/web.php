@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\LikeController;
 
 // Index faila atgriežšana
 Route::get('/', function () {
@@ -72,3 +73,6 @@ Route::get('/articles/{article_id}/translate', [ArticleController::class, 'trans
 // Raksta rediģēšana un atjaunošana
 Route::get('/articles/{article_id}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware('auth');
 Route::put('/articles/{article_id}/update', [ArticleController::class, 'update'])->name('article.update')->middleware('auth');
+
+// Patīk / nepatīk
+Route::post('/like-toggle',[LikeController::class, 'toggle'])->name('like.toggle')->middleware('auth');

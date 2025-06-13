@@ -43,4 +43,9 @@ class Article extends Model
     {
         return $this->hasMany(Feedback::class);
     }
+    
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }
