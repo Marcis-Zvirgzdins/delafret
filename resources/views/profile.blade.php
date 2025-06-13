@@ -26,8 +26,7 @@
                         <a href="{{ route('articles.show', $bookmark->article->id) }}" class="bookmark-item ds">
                             @if($bookmark->article->thumbnail)
                                 <img src="{{ asset('storage/' . $bookmark->article->thumbnail) }}" 
-                                     alt="{{ $bookmark->article->title }}" 
-                                     class="bookmark-image">
+                                     alt="{{ $bookmark->article->title }}">
                             @endif
                             <div class="bookmark-details">
                                 <h3 class="font1">{{ $bookmark->article->title }}</h3>
