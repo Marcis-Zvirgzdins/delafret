@@ -58,7 +58,7 @@ class ProfileController extends Controller
     }
     public function updateLanguage(Request $request)
     {
-        $request->validate(['language' => 'required|string|in:en,lv,de',]);
+        $request->validate(['language' => 'required|string|in:en,lv',]);
 
         $user = auth()->user();
         $user->language = $request->language;
