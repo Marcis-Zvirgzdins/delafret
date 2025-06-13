@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\LikeController;
 
 // Index faila atgriežšana
 Route::get('/', function () {
@@ -62,3 +63,6 @@ Route::post('/bookmarks/toggle', [BookmarkController::class, 'toggle'])->name('b
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 });
+
+// Patīk / nepatīk
+Route::post('/like-toggle',[LikeController::class, 'toggle'])->name('like.toggle')->middleware('auth');
