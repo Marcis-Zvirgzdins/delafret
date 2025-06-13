@@ -37,7 +37,7 @@
                                 @csrf
                                 <input type="hidden" name="article_id" value="{{ $article->id }}">
                                 
-                                <button type="submit" class="bookmark-container transparent ds" style="border: none; padding: 0;">
+                                <button type="submit" class="bookmark-container transparent ds" id="bookmark-button">
                                     <img src="{{ asset($bookmarked ? 'icons/bookmark-filled-w-32.svg' : 'icons/bookmark-w-32.svg') }}" alt="Bookmark">
                                 </button>
                             </form>

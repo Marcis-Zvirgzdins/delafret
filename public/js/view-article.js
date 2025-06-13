@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     copyLinkButton.addEventListener('click', function () {
         const currentUrl = window.location.href;
-
+    
         navigator.clipboard.writeText(currentUrl).then(function () {
             console.log('Link copied to clipboard');
         }).catch(function (error) {
@@ -13,13 +13,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Lietotāja pārvirzīšana uz reģistrācijas logu
 document.addEventListener('DOMContentLoaded', function () {
+    // Lietotāja pārvirzīšana uz reģistrācijas logu
     const registerButton = document.getElementById('register-button');
     const emailInput = document.getElementById('email');
 
-    registerButton.addEventListener('click', function () {
-        const email = emailInput.value.trim(); // Get the email value
-        window.location.href = `../register?email=${encodeURIComponent(email)}`;
-    });
+    if (registerButton && emailInput) {
+        registerButton.addEventListener('click', function () {
+            const email = emailInput.value.trim();
+            window.location.href = `../register?email=${encodeURIComponent(email)}`;
+        });
+    } 
+    else {
+        return;
+    }
 });

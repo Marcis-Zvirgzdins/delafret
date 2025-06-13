@@ -24,7 +24,7 @@
                                     {{ $article->title }}
                                 </a>
 
-                                <div class="aditional-info transparent ds">
+                                <div class="aditional-info transparent-color ds">
                                     <p class="font1 gt">Autors: {{ $article->author }}</p>
                                     @if($article->updated_at && $article->updated_at != $article->created_at)
                                         <p class="font1 gt">Atjaunināts: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
@@ -47,7 +47,7 @@
                                     @csrf
                                     <input type="hidden" name="article_id" value="{{ $article->id }}">
                                     
-                                    <button type="submit" class="bookmark-container transparent ds" style="border: none; padding: 0;">
+                                    <button type="submit" class="bookmark-container transparent ds" id="bookmark-button">
                                         <img src="{{ asset($bookmarked ? 'icons/bookmark-filled-w-32.svg' : 'icons/bookmark-w-32.svg') }}" alt="Bookmark">
                                     </button>
                                 </form>
