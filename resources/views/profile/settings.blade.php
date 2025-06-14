@@ -42,28 +42,28 @@
                         <label class="checkbox-container font1 wt ds2">
                             <input class="custom-checkbox" type="checkbox" name="categories[]" value="games" {{ in_array('games', $userCategories) ? 'checked' : '' }}>
                             <span class="checkmark"></span>
-                            Spēles
+                            Videospēles
                         </label>
                     </div>
                     <div class="form-group">
                         <label class="checkbox-container font1 wt ds2">
                             <input class="custom-checkbox" type="checkbox" name="categories[]" value="tech" {{ in_array('tech', $userCategories) ? 'checked' : '' }}>
                             <span class="checkmark"></span>
-                            Tehnoloģijas
+                            Tehnoloģija
                         </label>
                     </div>
                     <div class="form-group">
                         <label class="checkbox-container font1 wt ds2">
                             <input class="custom-checkbox" type="checkbox" name="categories[]" value="movies" {{ in_array('movies', $userCategories) ? 'checked' : '' }}>
                             <span class="checkmark"></span>
-                            Filmas
+                            Filmas & TV
                         </label>
                     </div>
                     <div class="form-group">
                         <label class="checkbox-container font1 wt ds2">
                             <input class="custom-checkbox" type="checkbox" name="categories[]" value="entertainment" {{ in_array('entertainment', $userCategories) ? 'checked' : '' }}>
                             <span class="checkmark"></span>
-                            Izklaide
+                            Izklaides
                         </label>
                     </div>
                     <button type="submit" class="font1 button cat-button">Saglabāt</button>
