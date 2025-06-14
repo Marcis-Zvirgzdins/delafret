@@ -11,7 +11,7 @@
                 @method('PUT')
 
                 <div class="create-element-container">
-                    <input class="ri font1 wt ds" placeholder="Virsraksts" type="text" id="title" name="title" value="{{ $article->title }}s" required>
+                    <input class="ri font1 wt ds" placeholder="Virsraksts" type="text" id="title" name="title" value="{{ $article->title }}" required>
                     @error('title')
                         <p>{{ $message }}</p>
                     @enderror

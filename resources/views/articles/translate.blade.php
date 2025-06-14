@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="create-element-container">
-                    <input class="ri font1 wt ds" placeholder="Virsraksts" type="text" id="title" name="title" value="{{ $article->title }}s" disabled>
+                    <input class="ri font1 wt ds" placeholder="Virsraksts" type="text" id="title" name="title" value="{{ $article->title }}" disabled>
                 </div>
 
                 <div class="create-element-container">
