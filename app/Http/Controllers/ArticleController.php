@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Str;
+use App\Models\ArticleVersion;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -122,7 +124,7 @@ class ArticleController extends Controller
 
     public function update(Request $request, $article_id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'thumbnail_text' => 'nullable|string|max:255',
@@ -130,12 +132,24 @@ class ArticleController extends Controller
         ]);
 
         $article = Article::findOrFail($article_id);
-        $article->update([
-            'title' => $request->title,
-            'author' => $request->author,
-            'thumbnail_text' => $request->thumbnail_text,
-            'content' => $request->content,
-        ]);
+
+        DB::transaction(function () use ($article, $validatedData, $request) {
+            ArticleVersion::create([
+                'article_id' => $article->id,
+                'title' => $article->title,
+                'thumbnail_text' => $article->thumbnail_text,
+                'content' => $article->content,
+                'author' => $article->author,
+                'revised_by_user_id' => auth()->id(),
+            ]);
+
+            $article->update([
+                'title' => $validatedData['title'],
+                'author' => $validatedData['author'],
+                'thumbnail_text' => $validatedData['thumbnail_text'],
+                'content' => $validatedData['content'],
+            ]);
+        });
 
         return redirect()->route('articles.show', $article->id)->with('success', 'Raksts veiksmīgi atjaunināts.');
     }

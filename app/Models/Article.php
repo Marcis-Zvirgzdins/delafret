@@ -48,4 +48,9 @@ class Article extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public function versions()
+    {
+        return $this->hasMany(ArticleVersion::class)->orderBy('version_created_at', 'desc');
+    }
 }
