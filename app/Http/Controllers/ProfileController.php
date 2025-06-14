@@ -56,4 +56,13 @@ class ProfileController extends Controller
         
         return view('profile', compact('bookmarks'));
     }
+
+    public function updateCategories(Request $request)
+    {
+        $user = auth()->user();
+        $user->categories = $request->input('categories', []);
+        $user->save();
+    
+        return redirect()->route('profile.settings')->with('success', 'Categories successfully updated.');
+    }
 }

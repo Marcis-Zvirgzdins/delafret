@@ -425,6 +425,8 @@ body {
 }
 .profile-container img {
     height: 128px;
+    width: 128px;
+    object-fit: cover;
     border-radius: 50%;
 }
 .profile-container {
@@ -1271,6 +1273,9 @@ body {
 .translate-container {
     right: 80px;
 }
+.translate-translate-pos {
+    right: 44px;
+}
 
 /* Papildus komentāru noformējums */
 .mleft-8 {
@@ -1366,4 +1371,118 @@ body {
     .create-container-container .create-container .lang-dropdown label, .lang-dropdown .end-container {
         width: 80px;
     }
+}
+
+/* Profila iestatījumi */
+.profile-settings-container {
+    padding: 12px;
+
+    background-color: #3d3d3d;
+    border-radius: 12px;
+}
+@media (max-width: 1432px) {
+    .p-settings-container-container {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}
+.profile-settings-container .profile-picture .profile-img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+.profile-settings-container .profile-picture {
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+
+    background-color: #444444;
+    border-radius: 12px;
+}
+.profile-edit-side-container p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+.profile-edit-side-container form button {
+    margin: 0;
+}
+.profile-edit-side-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px 24px;
+}
+.displayed-categories {
+    margin-top: 16px;
+    padding: 12px;
+
+    background-color: #444444;
+    border-radius: 12px;
+}
+.displayed-categories .sub-title-select-cat {
+    margin-top: 4px;
+    margin-bottom: 16px;
+    font-size: 18px;
+}
+.displayed-categories .form-group {
+    padding: 4px;
+}
+.displayed-categories .form-group label {
+    padding: 8px;
+}
+.displayed-categories .cat-button {
+    margin-top: 16px;
+}
+
+/* Sākuma lapas personalizētie raksti */
+.categorized-articles-container {
+    max-width: 800px;
+}
+.categorized-articles-container .category-section {
+    padding: 12px;
+    margin-top: 16px;
+
+    background-color: #3d3d3d;
+    border-radius: 12px;
+}
+.categorized-articles-container .category-section .title {
+    padding: 4px;
+    margin-top: 4px;
+    margin-bottom: 16px;
+
+    font-weight: 500;
+    font-size: 24px;
+}
+.categorized-articles-container .category-section .articles {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+.categorized-articles-container .category-section .articles .article {
+    flex: 1;
+}
+.categorized-articles-container .category-section .articles .article .image-container {
+    height: 200px;
+} 
+.categorized-articles-container .category-section .articles .article .image-container img {
+    height: 200px;
+    border-radius: 8px;
+}
+.categorized-articles-container .category-section .articles .article .aditional-info {
+    margin: 0;
+    width: fit-content;
+}
+.categorized-articles-container .category-section .articles .article .extra-info-container {
+    display: flex;
+    flex-direction: column;
+}
+.categorized-articles-container .category-section .articles .article .extra-info-container .article-title-index {
+    padding-top: 12px;
+    padding-bottom: 16px;
+}
+.categorized-articles-container .category-section .articles .article .extra-info-container .article-title-index:hover {
+    text-decoration: underline;
 }

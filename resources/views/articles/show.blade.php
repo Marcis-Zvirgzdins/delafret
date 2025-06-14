@@ -29,13 +29,16 @@
                     </form>
                 @endif
 
+                
+                @can('translate', $article)
+                    <a class="translate-container transparent ds {{ !auth()->user()->can('edit', $article) ? 'translate-translate-pos' : '' }}" href="{{ route('article.translate', $article->id) }}" href="{{ route('article.translate', $article->id) }}">
+                        <img src="{{ asset('icons/translate-w-32.svg') }}" alt="Translate">
+                    </a>
+                @endcan
+
                 @can('edit', $article)
                     <a class="edit-container transparent ds" href="{{ route('article.edit', $article->id) }}">
                         <img src="{{ asset('icons/edit-w-32.svg') }}" alt="Edit">
-                    </a>
-
-                    <a class="translate-container transparent ds" href="{{ route('article.translate', $article->id) }}">
-                        <img src="{{ asset('icons/translate-w-32.svg') }}" alt="Translate">
                     </a>
                 @endcan
 
@@ -244,12 +247,12 @@
 
             <div class="related-articles ds">
                 <p class="font1 wtl ct related-title ds2">Turpinat lasīt</p>
-                @if($relatedArticles->isEmpty())
+                @if($similarArticles->isEmpty())
                     <div class="empty ds">
                         <p class="font1 gt ct ds">Nav saistītu rakstu</p>
                     </div>
                 @else
-                    @foreach($relatedArticles as $related)
+                    @foreach($similarArticles as $related)
                         <div class="related-container ds">
                             <a class="related-thumbnail" href="{{ route('articles.show', $related->id) }}">
                                 <img class="ds" src="{{ asset('storage/' . $related->thumbnail) }}" alt="{{ $related->title }}">

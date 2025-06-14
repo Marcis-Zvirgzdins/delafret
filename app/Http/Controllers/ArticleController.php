@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -47,15 +48,54 @@ class ArticleController extends Controller
         return view('articles.category', compact('articles', 'category'));
     }
 
+    // Rakstu meklēšana pēc virsraksta vārdu līdzības
     public function show(Article $article)
     {
-        $relatedArticles = Article::where('category', $article->category)
-            ->where('id', '!=', $article->id)
-            ->latest()
-            ->take(3)
-            ->get();
+        $similarArticles = collect();
 
-         $liked = null;
+        // Izlaižam vārdus, kas ir īsāki par 3 burtiem
+        $titleWords = array_filter(explode(' ', Str::lower($article->title)), function($word) {
+            return strlen($word) > 3;
+        });
+
+        if (!empty($titleWords)) {
+            $similarArticlesQuery = Article::where('id', '!=', $article->id);
+
+            $similarArticlesQuery->where(function ($query) use ($titleWords) {
+                foreach ($titleWords as $word) {
+                    $query->orWhere('title', 'LIKE', '%' . $word . '%');
+                }
+            });
+
+            $selectRaw = '*, ';
+            $cases = [];
+            foreach ($titleWords as $index => $word) {
+                $cases[] = "CASE WHEN title LIKE '%" . addslashes($word) . "%' THEN 1 ELSE 0 END";
+            }
+            $selectRaw .= '(' . implode(' + ', $cases) . ') as relevance_score';
+
+            $foundByTitle = $similarArticlesQuery
+                ->selectRaw($selectRaw)
+                ->orderByDesc('relevance_score')
+                ->orderByDesc('created_at')
+                ->take(3)
+                ->get();
+
+            if ($foundByTitle->isNotEmpty()) {
+                $similarArticles = $foundByTitle;
+            }
+        }
+
+        // Ja nav atrasti atbilstoši raksti, tad kā iepriekš - 3 jaunākie kategorijā
+        if ($similarArticles->isEmpty()) {
+            $similarArticles = Article::where('category', $article->category)
+                ->where('id', '!=', $article->id)
+                ->latest()
+                ->take(3)
+                ->get();
+        }
+
+        $liked = null;
         if (auth()->check()) {
             $like = $article->likes()->where('user_id', auth()->id())->first();
             if ($like) {
@@ -63,7 +103,7 @@ class ArticleController extends Controller
             }
         }
 
-        return view('articles.show', compact('article', 'relatedArticles', 'liked'));
+        return view('articles.show', compact('article', 'similarArticles', 'liked'));
     }
 
     public function translate($article_id)

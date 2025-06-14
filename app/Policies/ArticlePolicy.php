@@ -14,4 +14,10 @@ class ArticlePolicy
     {
         return $user->id === $article->user_id || $user->role === 'admin';
     }
+    public function translate(User $user, Article $article)
+    {
+        return $user->id === $article->owner_id
+            || $user->role === 'translator'
+            || $user->role === 'admin';
+    }
 }
