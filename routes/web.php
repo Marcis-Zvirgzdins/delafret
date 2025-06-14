@@ -9,6 +9,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\LikeController;
+use App\Models\Article;
+use App\Models\User;
 
 // Index faila atgriežšana
 Route::get('/', function () {
@@ -42,10 +44,36 @@ Route::middleware(['auth'])->group(function () {
 // Raksta skats
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
-// Sākuma lapas 4 jaunākie raksti
+// Sākuma lapas 4 jaunākie raksti + kategoriju specifski raksti
 Route::get('/', function () {
-    $latestArticles = \App\Models\Article::latest('created_at')->take(4)->get();
-    return view('index', compact('latestArticles'));
+    $latestArticles = Article::latest('created_at')->take(4)->get();
+
+    $categorizedArticles = [];
+    $categoriesToQuery = [];
+
+    if (auth()->check()) {
+        $user = auth()->user();
+        $userSelectedCategories = $user->categories ?? [];
+
+        if (is_array($userSelectedCategories) && !empty($userSelectedCategories)) {
+            $categoriesToQuery = $userSelectedCategories;
+        }
+    } else {
+        $categoriesToQuery = ['games', 'tech', 'movies', 'entertainment'];
+    }
+
+    foreach ($categoriesToQuery as $categoryKey) {
+        $articlesInCategory = Article::where('category', $categoryKey)
+                                        ->latest('created_at')
+                                        ->take(2)
+                                        ->get();
+
+        if ($articlesInCategory->isNotEmpty()) {
+            $categorizedArticles[$categoryKey] = $articlesInCategory;
+        }
+    }
+
+    return view('index', compact('latestArticles', 'categorizedArticles'));
 })->name('index');
 
 // Raksta komentāri
@@ -76,3 +104,6 @@ Route::put('/articles/{article_id}/update', [ArticleController::class, 'update']
 
 // Patīk / nepatīk
 Route::post('/like-toggle',[LikeController::class, 'toggle'])->name('like.toggle')->middleware('auth');
+
+// Atzīmētās kategorijas
+Route::post('/profile/categories/update', [ProfileController::class, 'updateCategories'])->name('profile.categories.update');
