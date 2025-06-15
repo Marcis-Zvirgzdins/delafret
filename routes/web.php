@@ -114,28 +114,21 @@ Route::post('/profile/categories/update', [ProfileController::class, 'updateCate
 
 // Route::get('language/{lang}', [LanguageController::class, 'setLanguage'])->name('language.switch');
 
-use Illuminate\Support\Facades\Log;
 
 Route::get('/set-language/{locale}', function (string $locale) {
 
     if (!in_array($locale, ['en', 'lv'])) {
-        Log::warning('Invalid locale attempted', ['locale' => $locale]);
         abort(400);
     }
 
     // For authenticated users
     if (auth()->check()) {
-
-        Log::info('User is authenticated', ['user_id' => auth()->id()]);
         auth()->user()->update(['language' => $locale]);
-        Log::info('User language updated', ['user_id' => auth()->id(), 'language' => $locale]);
     }
 
     // Set for current session
     session()->put('locale', $locale);
-    Log::info('Locale stored in session', ['session_locale' => session('locale')]);
     App::setLocale($locale);
-    Log::info('App locale set', ['app_locale' => App::getLocale()]);
 
     return Redirect::back();
 })->name('language.switch');

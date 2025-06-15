@@ -258,7 +258,7 @@
                                 <img class="ds" src="{{ asset('storage/' . $related->thumbnail) }}" alt="{{ $related->title }}">
                             </a>
                             <div class="side-container">
-                                <a class="category {{ strtolower($related->category) }}-text font1 wt ds" href="{{ route('articles.category', strtolower($article->category)) }}">{{ $related->category }}</a>
+                                <a class="category {{ strtolower($related->category) }}-text font1 wt ds" href="{{ route('articles.category', strtolower($article->category)) }}">{{ ucfirst( __( 'messages.' . $related->category ) ) }}</a>
                                 <a class="title wt font1 ds2 title" href="{{ route('articles.show', $related->id) }}">
                                     {{ $related->title }}
                                 </a>
