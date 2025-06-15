@@ -1,6 +1,11 @@
+@php
+    $currentLang = auth()->check() ? auth()->user()->language : app()->getLocale();
+@endphp
+
+
 <div class="footer-container ds">
     <div class="aditional-info-container">
-        <div class="lang ds">
+        <div class="lang ds {{ $currentLang === 'lv' ? 'lang-selected' : '' }}">
             <a href="{{ route('language.switch', 'lv') }}" class="flag">
                 <img src="{{ asset('assets/lv.svg') }}" alt="LV">
             </a>
@@ -8,7 +13,7 @@
                 Latviešu
             </a>
         </div>
-        <div class="lang ds">
+        <div class="lang ds {{ $currentLang === 'en' ? 'lang-selected' : '' }}">
             <a href="{{ route('language.switch', 'en') }}" class="flag">
                 <img src="{{ asset('assets/us.svg') }}" alt="US">
             </a>

@@ -1,3 +1,7 @@
+@php
+    $currentLang = auth()->check() ? auth()->user()->language : app()->getLocale();
+@endphp
+
 <x-layoutnonav>
     <x-slot name="title">
         Delafret: {{__('messages.log_in_button')}}
@@ -42,7 +46,7 @@
 
             <div class="footer-container">
                 <div class="aditional-info-container" id="nml">
-                    <div class="lang ds">
+                    <div class="lang ds {{ $currentLang === 'lv' ? 'lang-selected' : '' }}">
                         <a class="flag" href="{{ route('language.switch', 'lv') }}">
                             <img class="ds center" src="{{ asset('assets/lv.svg') }}" alt="LV">
                         </a>
@@ -50,7 +54,7 @@
                             Latviešu
                         </a>
                     </div>
-                    <div class="lang ds">
+                    <div class="lang ds {{ $currentLang === 'en' ? 'lang-selected' : '' }}">
                         <a class="flag" href="{{ route('language.switch', 'en') }}">
                             <img class="ds center" src="{{ asset('assets/us.svg') }}" alt="US">
                         </a>
