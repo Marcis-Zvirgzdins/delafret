@@ -1,0 +1,48 @@
+server {
+    listen 8080; # Azure App Service expects this
+    listen [::]:8080;
+
+    root /home/site/wwwroot/public; # CORRECT LARAVEL PUBLIC DIRECTORY
+    index index.php index.html index.htm;
+    charset utf-8;
+
+    server_name _; # Default
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        
+        # Use the PHP-FPM socket you found or the default 127.0.0.1:9000
+        # If '127.0.0.1:9000' is what the *default* Azure Nginx config uses,
+        # it's safer to stick with that UNLESS you explicitly know your PHP 8.1
+        # on App Service is using a specific unix socket.
+        # Let's try what the default platform Nginx uses first.
+        fastcgi_pass 127.0.0.1:9000; 
+
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; # $document_root will be /home/site/wwwroot/public
+        include fastcgi_params;
+        # Add other params from the default Azure Nginx config if they seem important:
+        fastcgi_param HTTP_PROXY "";
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param QUERY_STRING $query_string;
+        fastcgi_intercept_errors on;
+        fastcgi_connect_timeout 300; 
+        fastcgi_send_timeout 3600; 
+        fastcgi_read_timeout 3600;
+        fastcgi_buffer_size 128k;
+        fastcgi_buffers 4 256k;
+        fastcgi_busy_buffers_size 256k;
+        fastcgi_temp_file_write_size 256k;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
