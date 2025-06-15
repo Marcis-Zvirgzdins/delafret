@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        
+        if (config('app.env') === 'production' || config('app.env') === 'staging') { // Or just directly apply it
+            URL::forceScheme('https');
+        }
+
         $this->registerPolicies();
     }
 }
