@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        Delafret: Jaunākās ziņas
+        Delafret: {{__('messages.latest_news')}}
     </x-slot>
 
     <x-suggested :articles="$latestArticles" />
@@ -11,10 +11,10 @@
                 <div class="category-section ds">
                     @php
                         $categoryDisplayNames = [
-                            'games' => 'Videospēles',
-                            'tech' => 'Tehnoloģija',
-                            'movies' => 'Filmas & TV',
-                            'entertainment' => 'Izklaides',
+                            'games' => __('messages.games'),
+                            'tech' => __('messages.tech'),
+                            'movies' => __('messages.movies'),
+                            'entertainment' => __('messages.entertainment'),
                         ];
                     @endphp
                     <p class="font1 wt title ct ds" id="{{ $categoryKey }}-cat-text">{{ $categoryDisplayNames[$categoryKey] ?? ucfirst($categoryKey) }}</p>
@@ -29,8 +29,8 @@
                                 <div class="extra-info-container">
                                     <a class="font1 wt article-title-index ds2" href="{{ route('articles.show', $article) }}">{{ $article->title }}</a>
                                     <div class="transparent-color aditional-info">
-                                        <p class="font1 gt">Autors: {{ $article->author }}</p>
-                                        <p class="font1 gt">Publicēts: {{ $article->created_at->format('d.m.Y') }}</p>
+                                        <p class="font1 gt">{{__('messages.author')}}: {{ $article->author }}</p>
+                                        <p class="font1 gt">{{__('messages.published')}}: {{ $article->created_at->format('d.m.Y') }}</p>
                                     </div>
                                 </div>
                             </div>

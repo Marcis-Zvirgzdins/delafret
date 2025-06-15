@@ -9,8 +9,10 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\LanguageController;
 use App\Models\Article;
-use App\Models\User;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Redirect;
 
 // Index faila atgriežšana
 Route::get('/', function () {
@@ -107,3 +109,33 @@ Route::post('/like-toggle',[LikeController::class, 'toggle'])->name('like.toggle
 
 // Atzīmētās kategorijas
 Route::post('/profile/categories/update', [ProfileController::class, 'updateCategories'])->name('profile.categories.update');
+
+// Lokalizācija
+
+// Route::get('language/{lang}', [LanguageController::class, 'setLanguage'])->name('language.switch');
+
+use Illuminate\Support\Facades\Log;
+
+Route::get('/set-language/{locale}', function (string $locale) {
+
+    if (!in_array($locale, ['en', 'lv'])) {
+        Log::warning('Invalid locale attempted', ['locale' => $locale]);
+        abort(400);
+    }
+
+    // For authenticated users
+    if (auth()->check()) {
+
+        Log::info('User is authenticated', ['user_id' => auth()->id()]);
+        auth()->user()->update(['language' => $locale]);
+        Log::info('User language updated', ['user_id' => auth()->id(), 'language' => $locale]);
+    }
+
+    // Set for current session
+    session()->put('locale', $locale);
+    Log::info('Locale stored in session', ['session_locale' => session('locale')]);
+    App::setLocale($locale);
+    Log::info('App locale set', ['app_locale' => App::getLocale()]);
+
+    return Redirect::back();
+})->name('language.switch');
