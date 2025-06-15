@@ -1145,6 +1145,9 @@ body {
     height: 82px;
     margin-bottom: auto;
 }
+.footer-container .lang.lang-selected {
+    background-color: #404040;
+}
 
 /* Raksta saites kopēšana */
 @keyframes spin {
