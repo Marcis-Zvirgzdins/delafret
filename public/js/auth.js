@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const img = this.querySelector('img');
             img.src = isPassword 
-                ? "https://delafret.net/icons/visible-off-w-32.svg"
-                : "https://delafret.net/icons/visible-w-32.svg";
+                ? "/public/icons/visible-off-w-32.svg"
+                : "/public/icons/icons/visible-w-32.svg";
         });
     });
 });
