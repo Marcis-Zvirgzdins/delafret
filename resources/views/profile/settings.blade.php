@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        Delafret: Rediģēt profilu
+        Delafret: {{ __('messages.edit_profile') }}
     </x-slot>
 
     <div class="mw14 center p142 p-settings-container-container">
@@ -13,7 +13,7 @@
                         <form action="{{ route('profile.remove') }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" id="remove-profile-btn" class="font1 button ds">Noņemt profila attēlu</button>
+                            <button type="submit" id="remove-profile-btn" class="font1 button ds">{{ __('messages.delete_profile_image') }}</button>
                         </form>
                     </div>
                 @else
@@ -23,7 +23,7 @@
                         <form id="upload-profile-form" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <button type="button" id="upload-profile-btn" class="font1 button ds">Augšupielādējiet profila attēlu</button>
+                                <button type="button" id="upload-profile-btn" class="font1 button ds">{{ __('messages.upload_profile_image') }}</button>
                                 <input type="file" name="profile_picture" id="profile-pic-input" style="display: none;">
                             </div>
                         </form>
@@ -34,7 +34,7 @@
             <div class="displayed-categories ds">
                 <form action="{{ route('profile.categories.update') }}" method="POST">
                     @csrf
-                    <p class="font1 wt ds2 sub-title-select-cat">Sākuma lapas kategorijas</p>
+                    <p class="font1 wt ds2 sub-title-select-cat">{{ __('messages.homepage_categories') }}</p>
                     @php
                         $userCategories = auth()->user()->categories ?? [];
                     @endphp
@@ -42,31 +42,31 @@
                         <label class="checkbox-container font1 wt ds2">
                             <input class="custom-checkbox" type="checkbox" name="categories[]" value="games" {{ in_array('games', $userCategories) ? 'checked' : '' }}>
                             <span class="checkmark"></span>
-                            Videospēles
+                            {{ __('messages.games') }}
                         </label>
                     </div>
                     <div class="form-group">
                         <label class="checkbox-container font1 wt ds2">
                             <input class="custom-checkbox" type="checkbox" name="categories[]" value="tech" {{ in_array('tech', $userCategories) ? 'checked' : '' }}>
                             <span class="checkmark"></span>
-                            Tehnoloģija
+                            {{ __('messages.tech') }}
                         </label>
                     </div>
                     <div class="form-group">
                         <label class="checkbox-container font1 wt ds2">
                             <input class="custom-checkbox" type="checkbox" name="categories[]" value="movies" {{ in_array('movies', $userCategories) ? 'checked' : '' }}>
                             <span class="checkmark"></span>
-                            Filmas & TV
+                            {{ __('messages.movies') }}
                         </label>
                     </div>
                     <div class="form-group">
                         <label class="checkbox-container font1 wt ds2">
                             <input class="custom-checkbox" type="checkbox" name="categories[]" value="entertainment" {{ in_array('entertainment', $userCategories) ? 'checked' : '' }}>
                             <span class="checkmark"></span>
-                            Izklaides
+                            {{ __('messages.entertainment') }}
                         </label>
                     </div>
-                    <button type="submit" class="font1 button cat-button">Saglabāt</button>
+                    <button type="submit" class="font1 button cat-button">{{ __('messages.save') }}</button>
                 </form>
             </div>
         </div>

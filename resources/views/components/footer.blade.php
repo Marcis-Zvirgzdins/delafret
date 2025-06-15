@@ -1,12 +1,20 @@
 <div class="footer-container ds">
     <div class="aditional-info-container">
         <div class="lang ds">
-            <a class="flag" href="{{ route('index') }}"><img class="ds center" src="{{ asset('assets/lv.svg') }}" alt="LV"></a>
-            <a class="c-label font1 gt" href="{{ route('index') }}">Latviešu</a>
+            <a href="{{ route('language.switch', 'lv') }}" class="flag">
+                <img src="{{ asset('assets/lv.svg') }}" alt="LV">
+            </a>
+            <a href="{{ route('language.switch', 'lv') }}" class="c-label font1 gt">
+                Latviešu
+            </a>
         </div>
         <div class="lang ds">
-            <a class="flag" href="{{ route('index') }}"><img class="ds center" src="{{ asset('assets/us.svg') }}" alt="US"></a>
-            <a class="c-label font1 gt" href="{{ route('index') }}">English</a>
+            <a href="{{ route('language.switch', 'en') }}" class="flag">
+                <img src="{{ asset('assets/us.svg') }}" alt="US">
+            </a>
+            <a href="{{ route('language.switch', 'en') }}" class="c-label font1 gt">
+                English
+            </a>
         </div>
     </div>
     <div class="copyright-notice">

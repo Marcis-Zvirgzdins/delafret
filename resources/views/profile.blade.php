@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        Delafret: Mans profils
+        Delafret: {{__('messages.my_profile')}}
     </x-slot>
     
     <div class="mw14 center p142 profile-container-container">
@@ -12,13 +12,13 @@
             @endif
             <div class="profile-subcontainer">
                 <p class="wtl font1 ds2">{{ auth()->user()->username }}</p>
-                <a href="{{ route('profile.settings') }}" class="font1 button ds">Profila iestatījumi</a>
+                <a href="{{ route('profile.settings') }}" class="font1 button ds">{{__('messages.profile_settings')}}</a>
             </div>
         </div>
     </div>
 
     <div class="mw center bookmarks-container ds">
-        <p class="font1 ds2 wt ct title ds2">Grāmatzīmes</p>
+        <p class="font1 ds2 wt ct title ds2">{{__('messages.bookmarks')}}</p>
         
         @if($bookmarks->count() > 0)
             <div class="bookmarks-list">
@@ -44,7 +44,7 @@
             </div>
         @else
             <div class="empty ds">
-                <p class="font1 gt ct">Jums nav pievienotu grāmatzīmju.</p>
+                <p class="font1 gt ct">{{__('messages.no_bookmarks')}}</p>
             </div>
         @endif
     </div>

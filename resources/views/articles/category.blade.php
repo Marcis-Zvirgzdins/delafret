@@ -1,10 +1,10 @@
     <x-layout>
         @php
             $categoryDisplayNames = [
-                'games' => 'Videospēles',
-                'tech' => 'Tehnoloģija',
-                'movies' => 'Filmas & TV',
-                'entertainment' => 'Izklaides',
+                'games' => __('messages.games'),
+                'tech' => __('messages.tech'),
+                'movies' => __('messages.movies'),
+                'entertainment' => __('messages.entertainment'),
             ];
             $currentCategoryKey = strtolower($category);
             $displayCategoryName = $categoryDisplayNames[$currentCategoryKey] ?? ucfirst($category);
@@ -17,17 +17,17 @@
             <div class="category-container ds">
                 @php
                     $categoryDisplayNames = [
-                        'games' => 'Videospēles',
-                        'tech' => 'Tehnoloģija',
-                        'movies' => 'Filmas & TV',
-                        'entertainment' => 'Izklaides',
+                        'games' => __('messages.games'),
+                        'tech' => __('messages.tech'),
+                        'movies' => __('messages.movies'),
+                        'entertainment' => __('messages.entertainment'),
                     ];
                 @endphp
                 <p class="font1 ct title ds" id="{{ strtolower($category) }}-cat-text">{{ $displayCategoryName }}</p>
 
                 @if($articles->isEmpty())
                     <div class="no-articles ds">
-                        <p class="font1 gt ct">Nav rakstu.</p>
+                        <p class="font1 gt ct">{{ __('messages.no_article') }}</p>
                     </div>
                 @else
                     <div class="cat-articles">
@@ -43,11 +43,11 @@
                                     </a>
 
                                     <div class="aditional-info transparent-color ds">
-                                        <p class="font1 gt">Autors: {{ $article->author }}</p>
+                                        <p class="font1 gt">{{ __('messages.author') }}: {{ $article->author }}</p>
                                         @if($article->updated_at && $article->updated_at != $article->created_at)
-                                            <p class="font1 gt">Atjaunināts: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
+                                            <p class="font1 gt">{{ __('messages.updated') }}: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
                                         @else
-                                            <p class="font1 gt">Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
+                                            <p class="font1 gt">{{ __('messages.published') }}: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
                                         @endif
                                     </div>
                                 </div>

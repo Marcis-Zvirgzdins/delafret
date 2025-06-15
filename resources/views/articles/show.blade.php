@@ -6,7 +6,7 @@
     <div class="mw14 center p142 article-container-container">
         <div class="article-container-main-container">
             <div class="article-container-main ds">
-                <a href="{{ route('articles.category', strtolower($article->category)) }}" class="ds cat font1 {{ strtolower($article->category) }}-text">{{ ucfirst($article->category) }}</a>
+                <a href="{{ route('articles.category', strtolower($article->category)) }}" class="ds cat font1 {{ strtolower($article->category) }}-text">{{ __('messages.' . $article->category) }}</a>
 
                 <p class="wt title font1 ds2">{{ $article->title }}</p>
 
@@ -43,10 +43,10 @@
                 @endcan
 
                 <div class="aditional-info transparent-color ds">
-                    <p class="font1 gt">Autors: {{ $article->author }}</p>
-                    <p class="font1 gt">Publicēts: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
+                    <p class="font1 gt">{{__('messages.author')}}: {{ $article->author }}</p>
+                    <p class="font1 gt">{{__('messages.published')}}: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
                     @if($article->updated_at && $article->updated_at != $article->created_at)
-                        <p class="font1 gt">Atjaunināts: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
+                        <p class="font1 gt">{{__('messages.updated')}}: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
                     @endif
                 </div>
 
@@ -79,17 +79,17 @@
                                     <p class="admin-badge font1 gt2 ds">Admin</p>
                             @endif
                             @if(auth()->user()->id === $article->user_id)
-                                <p class="writer-badge font1 gt2 ds @if(auth()->user()->role != 'admin') mleft-8 @endif">Author</p>
+                                <p class="writer-badge font1 gt2 ds @if(auth()->user()->role != 'admin') mleft-8 @endif">{{__('messages.author')}}</p>
                             @endif
 
                             <label class="checkbox-container font1 gt ds">
                                 <input type="checkbox" name="private" value="1" class="custom-checkbox">
                                 <span class="checkmark"></span>
-                                Privāts komentārs
+                                {{__('messages.private_comment')}}
                             </label>
                         </div>
                         <textarea class="font1 wt ds" id="content" name="content" rows="3" required></textarea>
-                        <button class="button font1 ds" type="submit">Publicēt</button>
+                        <button class="button font1 ds" type="submit">{{__('messages.publish')}}</button>
                     </form>
                 </div>
             @else
@@ -97,24 +97,24 @@
                     <form>
                         <div class="comments-profile">   
                             <img class="ds" src="{{ asset('assets/user-icon-blank-512.png') }}" alt="Profile Picture">
-                            <span class="gt2 font1 ds2">Lietotājs</span>
+                            <span class="gt2 font1 ds2">{{__('messages.user')}}</span>
                         </div>
                         <textarea class="font1 wt ds" id="content" name="content" rows="3" required></textarea>
-                        <div class="button button-disabled font1 ds ct" type="submit">Publicēt</div>
+                        <div class="button button-disabled font1 ds ct" type="submit">{{__('messages.publish')}}</div>
                     </form>
 
                     <div class="comment-overlay transparent2">
-                        <p class="font1 wtl ds2">Vēlaties komentēt?</p>
-                        <a href="{{ route('register') }}" class="button font1 ds2">Reģistrējaties</a>
+                        <p class="font1 wtl ds2">{{__('messages.cant_comment')}}</p>
+                        <a href="{{ route('register') }}" class="button font1 ds2">{{__('messages.comment_register')}}</a>
                     </div>
                 </div>
             @endauth
 
             <div class="comment-container ds">
-                <p class="font1 wtl ct comment-title ds2">Komentāri</p>
+                <p class="font1 wtl ct comment-title ds2">{{__('messages.comments')}}</p>
                 @if($article->comments->isEmpty())
                 <div class="comment empty ds">
-                    <p class="font1 gt ct  ds">Nav komentāru.</p>
+                    <p class="font1 gt ct  ds">{{__('messages.no_comments')}}</p>
                 </div>
                 @else
                     @foreach($article->comments as $comment)
@@ -130,12 +130,12 @@
                                     <p class="admin-badge font1 gt2 ds">Admin</p>
                                 @endif
                                 @if($comment->user->id === $article->user_id)
-                                    <p class="writer-badge font1 gt2 ds @if($comment->user->role != 'admin') mleft-8 @endif">Author</p>
+                                    <p class="writer-badge font1 gt2 ds @if($comment->user->role != 'admin') mleft-8 @endif">{{__('messages.author')}}</p>
                                 @endif
                             </div>
 
                             <p class="font1 wt comment-main">{{ $comment->content }}</p>
-                            <p class="font1 date gt pub-date-comment">{{ $comment->created_at ? $comment->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
+                            <p class="font1 date gt pub-date-comment">{{ $comment->created_at ? $comment->created_at->format('M d, Y, H:i') : __('messages.no_date') }}</p>
 
                             @auth
                                 @if(auth()->user()->role === 'admin' || auth()->id() === $comment->user_id)
@@ -156,10 +156,10 @@
 
             @can('edit', $article)
                 <div class="comment-container ds private-comments">
-                    <p class="font1 wtl ct comment-title ds2">Privātas atsauksmes</p>
+                    <p class="font1 wtl ct comment-title ds2">{{__('messages.private_feedback')}}</p>
                     @if($article->feedback->isEmpty())
                         <div class="comment empty ds">
-                            <p class="font1 gt ct ds">Nav privātu atsauksmju.</p>
+                            <p class="font1 gt ct ds">{{__('messages.no_feedback')}}</p>
                         </div>
                     @else
                         @foreach($article->feedback as $feedback)
@@ -180,14 +180,14 @@
             @guest
                 <div class="register-container ds">
                     <img class="ds" src="{{ asset('assets/logo-400.png') }}" alt="Delafret">
-                    <p class="font1 wt main-text">Reģistrējaties Delafret</p>
-                    <p class="font1 wt subtext">Priekš jaunākajām ziņām, skatiem un recenzijām</p>
-                    <p class="font1 wt subtext">Saglabājiet mīļākos rakstus, iesaistaties diskusijās</p>
+                    <p class="font1 wt main-text">{{__('messages.register_delafret')}}</p>
+                    <p class="font1 wt subtext">{{__('messages.register_motto_1')}}</p>
+                    <p class="font1 wt subtext">{{__('messages.register_motto_2')}}</p>
 
                     <div class="email-bar ds">
                         <input class="wt font1" placeholder="E-Pasts" id="email" type="text" name="email">
                         <button class="wt font1" type="button" id="register-button">
-                            Reģistrēties
+                            {{__('messages.register')}}
                         </button>
                     </div>
                 </div>
@@ -226,17 +226,17 @@
 
                     <button class="wt font1 share ds" id="copy-link-button" type="button">
                         <img src="{{ asset('icons/link-w-32.svg') }}" alt="Dislike">
-                        <span class="font1 wt">Kopēt saiti</span>
+                        <span class="font1 wt">{{__('messages.copy_link')}}</span>
                     </button>
                 </div>
             </div>
 
             <div class="lang-container ds">
                 <div class="ds create-element-container cat-container dropdown-menu-lang">
-                    <label class="wt font1" for="category">Valoda</label>
+                    <label class="wt font1" for="category">{{__('messages.language')}}</label>
                     <select class="font1 wt" id="category" name="category" required>
-                        <option value="games">Latviešu</option>
-                        <option value="tech">Angļu</option>
+                        <option value="games">{{__('messages.latvian')}}</option>
+                        <option value="tech">{{__('messages.english')}}</option>
                     </select>
                     @error('category')
                         <p>{{ $message }}</p>
@@ -246,10 +246,10 @@
             </div>
 
             <div class="related-articles ds">
-                <p class="font1 wtl ct related-title ds2">Turpinat lasīt</p>
+                <p class="font1 wtl ct related-title ds2">{{__('messages.continue_reading')}}</p>
                 @if($similarArticles->isEmpty())
                     <div class="empty ds">
-                        <p class="font1 gt ct ds">Nav saistītu rakstu</p>
+                        <p class="font1 gt ct ds">{{__('messages.no_continue_article')}}</p>
                     </div>
                 @else
                     @foreach($similarArticles as $related)

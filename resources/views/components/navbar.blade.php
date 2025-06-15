@@ -6,8 +6,8 @@
 
         <div class="profile">
             @guest
-                <a href="{{ route('login') }}" class="button font1">Pierakstīties</a>
-                <a href="{{ route('register') }}" class="button font1">Reģistrēties</a>
+                <a href="{{ route('login') }}" class="button font1">{{ __('messages.log_in') }}</a>
+                <a href="{{ route('register') }}" class="button font1">{{ __('messages.register') }}</a>
             @else
                 <a href="{{ route('profile') }}" class="redirect wt">
                     <div class="user">
@@ -23,7 +23,7 @@
 
                 <form method="POST" action="{{ route('logout') }}" onsubmit="this.querySelector('button').disabled = true;">
                     @csrf
-                    <button type="submit" class="button font1">Izrakstīties</button>
+                    <button type="submit" class="button font1">{{ __('messages.log_out') }}</button>
                 </form>
 
                 @can('create', App\Models\User::class)
@@ -39,9 +39,9 @@
         </div>
     </div>
     <div class="category center">
-        <a href="{{ route('articles.category', 'games') }}" class="games font1 wt">Videospēles</a>
-        <a href="{{ route('articles.category', 'tech') }}" class="tech font1 wt">Tehnoloģija</a>
-        <a href="{{ route('articles.category', 'movies') }}" class="movies font1 wt">Filmas & TV</a>
-        <a href="{{ route('articles.category', 'entertainment') }}" class="entertainment font1 wt">Izklaides</a>
+        <a href="{{ route('articles.category', 'games') }}" class="games font1 wt">{{ __('messages.games') }}</a>
+        <a href="{{ route('articles.category', 'tech') }}" class="tech font1 wt">{{ __('messages.tech') }}</a>
+        <a href="{{ route('articles.category', 'movies') }}" class="movies font1 wt">{{ __('messages.movies') }}</a>
+        <a href="{{ route('articles.category', 'entertainment') }}" class="entertainment font1 wt">{{ __('messages.entertainment') }}</a>
     </div>
 </div>
