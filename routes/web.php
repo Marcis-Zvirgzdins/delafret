@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\TranslationController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LanguageController;
 use App\Models\Article;
@@ -111,10 +112,6 @@ Route::post('/like-toggle',[LikeController::class, 'toggle'])->name('like.toggle
 Route::post('/profile/categories/update', [ProfileController::class, 'updateCategories'])->name('profile.categories.update');
 
 // Lokalizācija
-
-// Route::get('language/{lang}', [LanguageController::class, 'setLanguage'])->name('language.switch');
-
-
 Route::get('/set-language/{locale}', function (string $locale) {
 
     if (!in_array($locale, ['en', 'lv'])) {
@@ -132,3 +129,9 @@ Route::get('/set-language/{locale}', function (string $locale) {
 
     return Redirect::back();
 })->name('language.switch');
+
+// Tulkojumi
+
+Route::post('/translations', [TranslationController::class, 'store'])->name('translations.store');
+Route::get('/article/switch-language', [ArticleController::class, 'switchLanguage'])->name('article.switchLang');
+

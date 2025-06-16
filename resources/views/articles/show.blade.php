@@ -1,6 +1,10 @@
+@php
+    $isTranslatedView = ($lang !== $article->language) && $translation;
+@endphp
+
 <x-layout>
     <x-slot name="title">
-        Delafret: {{ $article->title }}
+        Delafret: {{ $isTranslatedView ? $translation->title : $article->title }}
     </x-slot>
 
     <div class="mw14 center p142 article-container-container">
@@ -8,8 +12,9 @@
             <div class="article-container-main ds">
                 <a href="{{ route('articles.category', strtolower($article->category)) }}" class="ds cat font1 {{ strtolower($article->category) }}-text">{{ __('messages.' . $article->category) }}</a>
 
-                <p class="wt title font1 ds2">{{ $article->title }}</p>
+                <p class="wt title font1 ds2">{{ $isTranslatedView ? $translation->title : $article->title }}</p>
 
+                {{-- bookmark logic unchanged --}}
                 @guest
                     <a class="bookmark-container transparent-color ds" href="{{ route('login') }}">
                         <img src="{{ asset('icons/bookmark-w-32.svg') }}" alt="Bookmark">
@@ -29,9 +34,9 @@
                     </form>
                 @endif
 
-                
+                {{-- translate/edit links unchanged --}}
                 @can('translate', $article)
-                    <a class="translate-container transparent ds {{ !auth()->user()->can('edit', $article) ? 'translate-translate-pos' : '' }}" href="{{ route('article.translate', $article->id) }}" href="{{ route('article.translate', $article->id) }}">
+                    <a class="translate-container transparent ds {{ !auth()->user()->can('edit', $article) ? 'translate-translate-pos' : '' }}" href="{{ route('article.translate', $article->id) }}">
                         <img src="{{ asset('icons/translate-w-32.svg') }}" alt="Translate">
                     </a>
                 @endcan
@@ -43,8 +48,15 @@
                 @endcan
 
                 <div class="aditional-info transparent-color ds">
-                    <p class="font1 gt">{{__('messages.author')}}: {{ $article->author }}</p>
-                    <p class="font1 gt">{{__('messages.published')}}: {{ $article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date' }}</p>
+                    <p class="font1 gt">{{__('messages.author')}}: {{ $isTranslatedView ? $translation->author : $article->author }}</p>
+                    <p class="font1 gt">{{__('messages.published')}}: 
+                        {{
+                            $isTranslatedView && $translation->created_at
+                                ? $translation->created_at->format('M d, Y, H:i')
+                                : ($article->created_at ? $article->created_at->format('M d, Y, H:i') : 'No Date')
+                        }}
+                    </p>
+
                     @if($article->updated_at && $article->updated_at != $article->created_at)
                         <p class="font1 gt">{{__('messages.updated')}}: {{ $article->updated_at->format('M d, Y, H:i') }}</p>
                     @endif
@@ -53,14 +65,14 @@
                 @if($article->thumbnail)
                 <div class="banner-img">
                     <img class="ds" src="{{ asset('storage/' . $article->thumbnail) }}" alt="Thumbnail for {{ $article->title }}" style="max-width: 100%; height: auto;">
-                    @if(!empty($article->thumbnail_text))
-                        <p class="gt font1 transparent ds">{{ $article->thumbnail_text }}</p>
+                    @if(!empty($isTranslatedView ? $translation->thumbnail_text : $article->thumbnail_text))
+                        <p class="gt font1 transparent ds">{{ $isTranslatedView ? $translation->thumbnail_text : $article->thumbnail_text }}</p>
                     @endif
                 </div>
                 @endif
 
                 <div>
-                    <p class="font1 wt ds2 nowrap article-contents">{{ $article->content }}</p>
+                    <p class="font1 wt ds2 nowrap article-contents">{{ $isTranslatedView ? $translation->content : $article->content }}</p>
                 </div>
             </div>
 
@@ -230,20 +242,39 @@
                     </button>
                 </div>
             </div>
+            
+            @php
+                $hasTranslation = $article->language === 'lv'
+                    ? $article->translatedTo('en')
+                    : $article->translatedTo('lv');
+            @endphp
 
-            <div class="lang-container ds">
-                <div class="ds create-element-container cat-container dropdown-menu-lang">
-                    <label class="wt font1" for="category">{{__('messages.language')}}</label>
-                    <select class="font1 wt" id="category" name="category" required>
-                        <option value="games">{{__('messages.latvian')}}</option>
-                        <option value="tech">{{__('messages.english')}}</option>
-                    </select>
-                    @error('category')
-                        <p>{{ $message }}</p>
-                    @enderror
-                    <div class="end-container"></div>
-                </div>
-            </div>
+            @if ($hasTranslation)
+                <form method="GET" action="{{ route('article.switchLang') }}" class="lang-container ds">
+                    <div class="ds create-element-container cat-container dropdown-menu-lang">
+                        <label class="wt font1" for="lang-select">{{ __('messages.language') }}</label>
+
+
+                        @php
+                            $currentArticle = $isTranslatedView ? $translation : $article;
+                        @endphp
+
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
+
+                        <select class="font1 wt" id="lang-select" name="language" onchange="this.form.submit()">
+                            <option value="lv" {{ $currentArticle->language === 'lv' ? 'selected' : '' }}>
+                                {{ __('messages.latvian') }}
+                            </option>
+                            <option value="en" {{ $currentArticle->language === 'en' ? 'selected' : '' }}>
+                                {{ __('messages.english') }}
+                            </option>
+                        </select>
+
+                        <div class="end-container"></div>
+                    </div>
+                </form>
+            @endif
+
 
             <div class="related-articles ds">
                 <p class="font1 wtl ct related-title ds2">{{__('messages.continue_reading')}}</p>

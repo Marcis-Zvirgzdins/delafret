@@ -8,9 +8,14 @@
             <p class="wt font1 ct title ds2">{{__('messages.original_article')}}</p>
             <form>
                 <div class="lang-dropdown ds create-element-container cat-container">
-                    <label class="wt font1" for="category">{{__('messages.language')}}</label>
+                    <label class="wt font1" for="category">{{ __('messages.language') }}</label>
                     <select class="font1 wt" id="category" name="category" disabled>
-                        <option value="latvian">{{__('messages.latvian')}}</option>
+                        <option value="lv" {{ ($article->language ?? app()->getLocale()) === 'lv' ? 'selected' : '' }}>
+                            {{ __('messages.latvian') }}
+                        </option>
+                        <option value="en" {{ ($article->language ?? app()->getLocale()) === 'en' ? 'selected' : '' }}>
+                            {{ __('messages.english') }}
+                        </option>
                     </select>
                     <div class="end-container"></div>
                 </div>
@@ -37,18 +42,20 @@
 
         <div class="create-container ds center">
             <p class="wt font1 ct title ds2">{{__('messages.article_translate')}}</p>
-            <form>
+            <form method="POST" action="{{ route('translations.store') }}">
             @csrf
                 <div class="lang-dropdown ds create-element-container cat-container">
-                    <label class="wt font1" for="category">{{__('messages.language')}}</label>
-                    <select class="font1 wt" id="category" name="category" required>
-                        <option value="english">{{__('messages.english')}}</option>
+                    <label class="wt font1" for="language">{{ __('messages.language') }}</label>
+                    <select class="font1 wt" id="language" name="language" required>
+                        @if ($article->language === 'lv')
+                            <option value="en" selected>{{ __('messages.english') }}</option>
+                        @elseif ($article->language === 'en')
+                            <option value="lv" selected>{{ __('messages.latvian') }}</option>
+                        @endif
                     </select>
-                    @error('category')
-                        <p>{{ $message }}</p>
-                    @enderror
                     <div class="end-container"></div>
                 </div>
+
                 
                 <div class="create-element-container">
                     <input class="ri font1 wt ds" placeholder="{{__('messages.title')}}" type="text" id="title" name="title" value="{{ old('title') }}" required>
@@ -56,7 +63,7 @@
                         <p>{{ $message }}</p>
                     @enderror
                 </div>
-
+                <input type="hidden" name="article_id" value="{{ $article->id }}">
                 <div class="create-element-container">
                     <input class="ri font1 wt ds" placeholder="{{__('messages.author')}}" type="text" id="author" name="author" value="{{ old('author') }}" required>
                     @error('author')
