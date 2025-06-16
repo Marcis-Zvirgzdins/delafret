@@ -8,6 +8,18 @@
             <p class="wt font1 ct title ds2">{{ __('messages.create_article') }}</p>
             <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <div class="lang-dropdown ds create-element-container cat-container">
+                    <label class="wt font1" for="language">{{ __('messages.language') }}</label>
+                    <select class="font1 wt" id="language" name="language" required>
+                        <option value="lv" {{ old('language') == 'lv' ? 'selected' : '' }}>{{ __('messages.latvian') }}</option>
+                        <option value="en" {{ old('language') == 'en' ? 'selected' : '' }}>{{ __('messages.english') }}</option>
+                    </select>
+                    <div class="end-container"></div>
+                    @error('language')
+                        <p>{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <div class="create-element-container">
                     <input class="ri font1 wt ds" placeholder="{{ __('messages.title') }}" type="text" id="title" name="title" value="{{ old('title') }}" required>
                     @error('title')

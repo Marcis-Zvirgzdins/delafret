@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Translation;
 use Illuminate\Support\Str;
 use App\Models\ArticleVersion;
 use Illuminate\Support\Facades\DB;
@@ -21,9 +22,10 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'thumbnail' => 'required|image',
-            'thumbnail_text' => 'nullable|string|max:255',
+            'thumbnail_text' => 'nullable|string|max:255',      
             'category' => 'required|in:games,tech,movies,entertainment',
             'content' => 'required|string',
+            'language' => 'required|in:lv,en',
             'author' => 'required|string|max:255',
         ]);
     
@@ -32,7 +34,7 @@ class ArticleController extends Controller
         }
     
         $validated['user_id'] = auth()->id();
-    
+
         Article::create($validated);
     
         return redirect()->route('index')->with('success', 'Article created successfully!');
@@ -51,7 +53,7 @@ class ArticleController extends Controller
     }
 
     // Rakstu meklēšana pēc virsraksta vārdu līdzības
-    public function show(Article $article)
+    public function show(Request $request, Article $article)
     {
         $similarArticles = collect();
 
@@ -105,7 +107,15 @@ class ArticleController extends Controller
             }
         }
 
-        return view('articles.show', compact('article', 'similarArticles', 'liked'));
+        $lang = $request->get('language', $article->language);
+
+        $translation = null;
+        if ($lang !== $article->language) {
+            $translation = $article->translations()->where('language', $lang)->first();
+        }
+
+
+        return view('articles.show', compact('article','translation', 'lang' , 'similarArticles', 'liked'));
     }
 
     public function translate($article_id)
@@ -125,6 +135,7 @@ class ArticleController extends Controller
     public function update(Request $request, $article_id)
     {
         $validatedData = $request->validate([
+            'language' => 'required|string|in:en,lv',
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'thumbnail_text' => 'nullable|string|max:255',
@@ -140,6 +151,7 @@ class ArticleController extends Controller
                 'thumbnail_text' => $article->thumbnail_text,
                 'content' => $article->content,
                 'author' => $article->author,
+                'language' => $article->language,
                 'revised_by_user_id' => auth()->id(),
             ]);
 
@@ -148,9 +160,30 @@ class ArticleController extends Controller
                 'author' => $validatedData['author'],
                 'thumbnail_text' => $validatedData['thumbnail_text'],
                 'content' => $validatedData['content'],
+                'language' => $validatedData['language'],
             ]);
         });
 
         return redirect()->route('articles.show', $article->id)->with('success', 'Raksts veiksmīgi atjaunināts.');
     }
+
+    public function switchLanguage(Request $request)
+    {
+        $request->validate([
+            'article_id' => 'required|integer|exists:articles,id',
+            'language' => 'required|string|in:lv,en',
+        ]);
+
+        $originalArticle = Article::findOrFail($request->article_id);
+        $targetLang = $request->language;
+
+        return redirect()->route('articles.show', ['article' => $originalArticle->id, 'language' => $targetLang]);
+    }
+
+    
+
+
+
+
+
 }

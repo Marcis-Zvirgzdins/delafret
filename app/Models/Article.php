@@ -17,6 +17,7 @@ class Article extends Model
         'content',
         'author',
         'thumbnail_text',
+        'language',
     ];
 
     public function comments()
@@ -52,5 +53,14 @@ class Article extends Model
     public function versions()
     {
         return $this->hasMany(ArticleVersion::class)->orderBy('version_created_at', 'desc');
+    }
+
+    public function translations()
+    {
+        return $this->hasMany(Translation::class);
+    }
+    public function translatedTo($lang)
+    {
+        return $this->translations()->where('language', $lang)->exists();
     }
 }

@@ -10,6 +10,16 @@
                 @csrf
                 @method('PUT')
 
+                <div class="lang-dropdown ds create-element-container cat-container">
+                    <label class="wt font1" for="language">{{ __('messages.language') }}</label>
+                    <select class="font1 wt" id="language" name="language" required>
+                        <option value="en" {{ $article->language === 'en' ? 'selected' : '' }}>{{ __('messages.english') }}</option>
+                        <option value="lv" {{ $article->language === 'lv' ? 'selected' : '' }}>{{ __('messages.latvian') }}</option>
+                    </select>
+                    <div class="end-container"></div>
+                </div>
+
+
                 <div class="create-element-container">
                     <input class="ri font1 wt ds" placeholder="{{ __('messages.title') }}" type="text" id="title" name="title" value="{{ $article->title }}" required>
                     @error('title')
