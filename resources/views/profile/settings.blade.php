@@ -19,7 +19,12 @@
                 @else
                     <img class="ds profile-img" class="ds" src="{{ asset('assets/user-icon-blank-512.png') }}" alt="Profile Picture">
                     <div class="profile-edit-side-container">
-                        <p class="wt font1 ds2">{{ auth()->user()->username }}</p>
+                        @php
+                            $response = file_get_contents('https://ipinfo.io/json');
+                            $data = json_decode($response, true);
+                            $ip = $data['ip'] ?? 'Unknown IP';
+                        @endphp
+                        <p class="wt font1 ds2">{{ auth()->user()->username }}  • ({{ $ip }})</p>
                         <form id="upload-profile-form" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
